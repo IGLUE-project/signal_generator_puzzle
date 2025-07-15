@@ -27,33 +27,16 @@ const MainScreen = (props) => {
   const mapRange = (value, min1, max1, min2, max2) => {
     return min2 + ((value - min1) * (max2 - min2)) / (max1 - min1);
   };
-  // 0 a 120 son los valoreas que devuelven los diales, el resto son los rangos de valores que estoy dispuesto a poner
+  // 0 a 119 son los valores que devuelven los diales, el resto son los rangos de valores que estoy dispuesto a poner
   const frequencyMapped = mapRange(frequency/3, 0, 119, appSettings.minFrequency, appSettings.maxFrequency); // Frecuencia entre 0.6 y 4.2
   const wavelengthMapped = mapRange(wavelength/3, 0, 119, appSettings.minWavelength, appSettings.maxWavelength); // Wavelength entre 10 y 80
   const amplitudeMapped = mapRange(amplitude/3, 0, 119, appSettings.minAmplitude, appSettings.maxAmplitude); // Amplitud entre 25 y 80
   const [waveType, setWaveType] = useState("sine"); // Tipo de onda, por defecto es "sine"; "square", "triangle", "sawtooth"
 
   const [isReseting, setIsReseting] = useState(false); // Estado para saber si se está reiniciando el lock
-const [audioAmplitude, setAudioAmplitude] = useState(amplitude);
+  const [audioAmplitude, setAudioAmplitude] = useState(amplitude);
   //
 
-  const styles ={
-    "STANDARD": {
-      dial_text_color: "#000000",
-      dial_text_size: "13vmin",
-    },
-    "RETRO": {
-      dial_text_color:  "#FFFFFF",
-      dial_text_size: "10vmin",
-    },
-    "FUTURISTIC": {
-      dial_sound: "sounds/spin.wav",
-      dial_text_color: "#59c2ca",
-    }
-  }
-  const defaultStyle = styles["STANDARD"];
-  const style = styles[appSettings.skin] || styles["STANDARD"];
-//
 
   useEffect(() => {
     handleResize();
@@ -134,6 +117,10 @@ const [audioAmplitude, setAudioAmplitude] = useState(amplitude);
     if (processingSolution) {
       return;
     }
+
+    let audio = document.getElementById("audio_beep");
+    audio.currentTime = 0; // Reinicia el audio
+    audio.play();
 
     setProcessingSolution(true);
     Utils.log("Check solution", [ frequency/3, wavelength/3, amplitude/3]);
@@ -274,6 +261,9 @@ const playFrequency = (frequency) => {
 };
 
 const changeWaveType = () => {
+  let audio = document.getElementById("audio_beep");
+  audio.currentTime = 0; // Reinicia el audio
+  audio.play();
   const waveTypes = ["sine", "square", "triangle", "sawtooth"];
   const currentIndex = waveTypes.indexOf(waveType);
   const nextIndex = (currentIndex + 1) % waveTypes.length;

@@ -3,7 +3,7 @@ export const DEFAULT_APP_SETTINGS = {
   actionAfterSolve: "NONE",
   message: undefined,
   keysType: "NUMBERS",
-  background: "images/standard/background3.png",
+  background: "images/standard/background.png",
   backgroundOscilloscope : "images/standard/background_oscilloscope.png",
   backgroundDial: "images/standard/dial.png",
   modeButton: "images/standard/mode_button.png",
@@ -14,20 +14,18 @@ export const DEFAULT_APP_SETTINGS = {
   imageLightOff: "images/standard/light_off.png",
   imageLightNok: "images/standard/light_nok.png",
   imageLightOk: "images/standard/light_ok.png",
-  //soundBeep: "sounds/beep.mp3",
+  soundBeep: "sounds/beep.mp3",
   soundNok: "sounds/solution_nok.mp3",
   soundOk: "sounds/solution_ok.mp3",
   soundDial: "sounds/spin.wav",
 
   soundAfterSolve: "sounds/after_solve.mp3",
-  //timeSoundAfterSolve: 4000, // Time in milliseconds to play the sound after solving
 
   dialWidth: 0.7, // Relative size of the dial compared to the box width
   dialHeight: 0.7, // Relative size of the dial compared to the box height
   dialTextSize: "2.5vmin", // Font size for the dial text
   dialTextColor: "#000000", // Color for the dial text
 
-  //lightBack: "false", // Controls whether to show the image behind the dial frame
 
   rayWidth: 0.59, // Relative width of the ray compared to the box width
   rayHeight: 0.6, // Relative height of the ray compared to the box height
