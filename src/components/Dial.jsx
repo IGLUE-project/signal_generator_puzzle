@@ -10,60 +10,40 @@ const  Dial = ( props ) => {
     const [rotationDirection, setRotationDirection] = useState(false); // Dirección de rotación (horario o antihorario)
 
     const handleMouseMove = (event) => {
-        if (!isMouseDown || props.checking || props.isReseting) return ; // Solo ejecuta si el mouse está presionado    
+        if (!isMouseDown || props.checking || props.isReseting) return ;   
         let audio  = document.getElementById("audio_wheel");
-        let rounded = calculateAngle(event); // Calcula el ángulo 
-       // Calcula la diferencia de ángulos de forma cíclica
+        let rounded = calculateAngle(event); 
         const angleDifference = normalizeAngleDifference(rounded - startAngle);
-       // Calcula la rotación acumulada y normalízala
         const newRotation = normalizeAngle(initialRotation + angleDifference);
         const rotationDir = getRotationDirection(props.rotationAngle/6, newRotation/6);
-        //Si se intenta girar en sentido contrario a la rotacion actual, no se hace nada
-        /*if(rotationDirection === ''){
-        setRotationDirection(rotationDir);
-        }else if(rotationDirection !== rotationDir){
-          return;}*/
-        //if(props.rotationAngle === newRotation)return; // No actualiza si el ángulo no ha cambiado
-
-       //console.log(getRotationDirection(props.rotationAngle/6, newRotation/6));
-
         if(props.rotationAngle === newRotation) return; // No actualiza si el ángulo no ha cambiado
-        if(props.rotationAngle/3===119 && rotationDir) return; // Si el nuevo ángulo es menor a -55 y la dirección es antihoraria, no hace nada
-       // console.log(newRotation/3, rotationDir);
+        if(props.rotationAngle/3===119 && rotationDir) return; 
         if(props.rotationAngle/3===0 && !rotationDir) return;
 
-        props.setRotationAngle(newRotation);     // Actualiza el ángulo de rotación
+        props.setRotationAngle(newRotation);     
         audio.play();
     };
 
     const handleMouseUp = () => {
         if (props.checking || props.isReseting) return ;
-        setIsMouseDown(false); // Indica que el mouse ya no está presionado
-        //reset(); // Reinicia la rotación //Poniendolo aqui, hace efecto de teelfono de dial
-        //Para poder poner -55 si va contrarreloj o 30 si va a favor
-       // props.setSolutionArray((sol) => [...sol,props.rotationAngle/3]);
-        //setRotationDirection(''); //Reinicia la direccion de rotacion
+        setIsMouseDown(false); 
     };
 
     const handleMouseDown = (event) => {
         if (props.checking || props.isReseting) return ;
-        setIsMouseDown(true); // Indica que el mouse está presionado    
-        let rounded = calculateAngle(event); // Calcula el ángulo inicial
-        setStartAngle(rounded);     // Guarda el ángulo inicial y el ángulo actual del lock
-        setInitialRotation(props.rotationAngle); // Guarda el ángulo actual del lock    
-        //console.log(props.xPosition);
+        setIsMouseDown(true);  
+        let rounded = calculateAngle(event); 
+        setStartAngle(rounded);     
+        setInitialRotation(props.rotationAngle);
       };
 
     const calculateAngle = (event) => {
-        const lockElement = document.getElementById(props.id); // Obtiene el elemento del lock
+        const lockElement = document.getElementById(props.id); 
         const rect = lockElement.getBoundingClientRect();  
-        // Calcula el centro del div
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;  
-        // Calcula el ángulo inicial en radianes y lo convierte a grados
         const radians = Math.atan2(event.clientY - centerY, event.clientX - centerX);
         let angle = radians * (180 / Math.PI);  
-        // Normaliza el ángulo para que esté entre 0° y 360°
         if (angle < 0) {
           angle += 360;}
         return Math.round(angle / 3) * 3; 
@@ -89,11 +69,11 @@ const  Dial = ( props ) => {
 
     useEffect(() => {    
         if (props.isReseting) { 
-            reset(); // Reinicia el lock
-        }}, [props.isReseting]); // Se ejecuta cuando isReseting cambia
+            reset(); 
+        }}, [props.isReseting]); 
 
     return(
-        <div className='lockContainer' style={{  
+        <div className='dialContainer' style={{  
             width: Math.min(props.boxWidth, props.boxHeight) * 0.24, 
             height: Math.min(props.boxWidth, props.boxHeight) * 0.24,
             left: props.xPosition,
@@ -106,19 +86,14 @@ const  Dial = ( props ) => {
             onMouseLeave={() => setIsMouseDown(false)} >
           
             <div className="dial" id={props.id} style={{ 
-              width: "100%", // Usa el menor valor para asegurar que sea cuadrado
-              height: "100%", // Usa el menor valor para asegurar que sea cuadrado
-              //marginLeft: props.boxWidth / 2 * 0.225,
+              width: "100%", 
+              height: "100%", 
               
               backgroundImage: `url(${appSettings.backgroundDial})`, // Imagen del dial
-              transform: `rotate(${props.rotationAngle}deg)`, // Rotación dinámica.
-              transition: props.isReseting ? "transform 2.5s ease" : "none", // Transición suave solo durante el reset
+              transform: `rotate(${props.rotationAngle}deg)`, 
+              transition: props.isReseting ? "transform 2.5s ease" : "none", // Transición suavedurante el reset
             }}>
-              <p id="rotationNum" className='rotationNum' onDragStart={(event) => event.preventDefault()} 
-              >{props.name}</p>
-            </div>
-            {/*<p id="rotationNum" className='rotationNum' onDragStart={(event) => event.preventDefault()} 
-              >{Math.round(props.rotationAngle/3)}</p>      */}
+              <p id="rotationNum" className='rotationNum' onDragStart={(event) => event.preventDefault()} >{props.name}</p></div>
               <audio id="audio_wheel" src="sounds/spin.wav" autostart="false" preload="auto" />    
         </div>
     );

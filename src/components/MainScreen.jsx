@@ -64,8 +64,6 @@ const MainScreen = (props) => {
     let _boxWidth = _lockWidth * 0.7;
     let _boxHeight = _lockHeight * 0.7;
 
-    //let _backgroundNokWidth = _lockWidth * 0.8;
-    //let _backgroundNokHeight = _lockHeight * 0.8;
 
     let _lightWidth;
     let _lightHeight;
@@ -166,34 +164,22 @@ const MainScreen = (props) => {
         
         if(appSettings.actionAfterSolve === "PLAY_SOUND"){
           //playFrequency(frequencyMapped); // Reproduce el sonido de la frecuencia
-          audio = document.getElementById("audio_post_success");
-          //handlePlayAudioAndVisual();
-          
+          audio = document.getElementById("audio_post_success");          
           audio.play();
           visualizeAudio(audio);
-          /*setTimeout(() => {
-            props.onKeypadSolved(solution); //Cambiar
-            Utils.log("Puzzle solved, sending solution");
-            
-          }, appSettings.timeSoundAfterSolve); */
           audio.onended = () => {
             props.onKeypadSolved(solution);
-          }
-          
+          }          
         }else{
-          props.onKeypadSolved(solution); //Cambiar
-          
+          props.onKeypadSolved(solution); //Cambiar          
         }
       }
-    }, afterChangeBoxLightDelay);
-    
-    //!success ? audio.play() : playFrequency(frequencyMapped); // Reproduce el sonido de la frecuencia
+    }, afterChangeBoxLightDelay);    
     audio.play();
   }
 
-
+  /* Funcion para modificar la onda según el audio que se esta reproduciendo*/
   const visualizeAudio = (audio) => {
-    //const audio = document.getElementById("audio_post_success");
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const source = audioContext.createMediaElementSource(audio);
     const analyser = audioContext.createAnalyser();
@@ -205,24 +191,20 @@ const MainScreen = (props) => {
 
     function update() {
       analyser.getByteTimeDomainData(dataArray);
-      // Calcula la amplitud RMS (root mean square)
       let sum = 0;
       for (let i = 0; i < dataArray.length; i++) {
         const value = (dataArray[i] - 128) / 128;
         sum += value * value;
       }
       const rms = Math.sqrt(sum / dataArray.length);
-      // Ajusta el rango de amplitud visual según tu escala
-      setAudioAmplitude(amplitudeMapped + rms * appSettings.maxAmplitude); // Ejemplo: entre 25 y 80
-
+      setAudioAmplitude(amplitudeMapped + rms * appSettings.maxAmplitude); 
       if (!audio.paused && !audio.ended) {
         requestAnimationFrame(update);
       } else {
-        setAudioAmplitude(amplitudeMapped); // Restaura valor original al terminar
+        setAudioAmplitude(amplitudeMapped); 
         audioContext.close();
       }
     }
-
     update();
   };
 
@@ -235,30 +217,29 @@ const MainScreen = (props) => {
 
   const  reset = () =>{
     setIsReseting(true);
-    setAmplitude(0); // Reinicia la amplitud
-    setFrequency(0); // Reinicia la frecuencia
-    setWavelength(0); // Reinicia la longitud de onda
+    setAmplitude(0); 
+    setFrequency(0); 
+    setWavelength(0); 
     setTimeout(() => {      
       setIsReseting(false);
     }, 2500);
   }
-  //https://www.cirruslabs.io/blog1/modernized-technology/quick-start-to-generate-tones-in-javascript
-  
-const playFrequency = (frequency) => {
-  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  const oscillator = audioContext.createOscillator();
-  oscillator.type = waveType; // "sine", "square", "triangle", "sawtooth"
-  oscillator.frequency.value = frequency * 1000; // Ajusta según tu escala
 
-  oscillator.connect(audioContext.destination);
-  oscillator.start();
+  /** Funcion para reproducir una frecuencia, segun la amplitud de la onda */
+  //https://www.cirruslabs.io/blog1/modernized-technology/quick-start-to-generate-tones-in-javascript  
+  const playFrequency = (frequency) => {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    oscillator.type = waveType; // "sine", "square", "triangle", "sawtooth"
+    oscillator.frequency.value = frequency * 1000; // Ajusta según tu escala
 
-  // Detén el sonido después de 0.5 segundos (ajusta si quieres)
-  setTimeout(() => {
-    oscillator.stop();
-    audioContext.close();
-  }, 1000);
-};
+    oscillator.connect(audioContext.destination);
+    oscillator.start();
+    setTimeout(() => {
+      oscillator.stop();
+      audioContext.close();
+    }, 1000);
+  };
 
 const changeWaveType = () => {
   let audio = document.getElementById("audio_beep");
@@ -274,7 +255,7 @@ const changeWaveType = () => {
 
   return (
     <div id="screen_main" className={"screen_content"} style={{ backgroundImage: backgroundImage }}>
-        <div className="lockContainer" style={{backgroundImage: 'url('+appSettings.backgroundOscilloscope+')', width: containerWidth, height: containerHeight}}>
+        <div className="oscilloscopeContainer" style={{backgroundImage: 'url('+appSettings.backgroundOscilloscope+')', width: containerWidth, height: containerHeight}}>
             <div style={{  display: "flex",position:'absolute',alignItems: "center",marginTop: containerMarginTop, marginLeft: containerMarginLeft}}>
                 <Dial id={"dial-frequency"} boxWidth={boxWidth} boxHeight={boxHeight} checking={processingSolution} 
                   rotationAngle={frequency} setRotationAngle={setFrequency} isReseting={isReseting}

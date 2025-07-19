@@ -35,6 +35,11 @@ div.boxButton {
     align-items: center;
     justify-content: center;
 	cursor: pointer;
+	transition: transform 0.2s ease, filter 0.2s ease;
+}
+div.boxButton:hover {
+	filter: brightness(1.2); /* Aumenta el brillo al pasar el mouse */
+	transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el mouse */
 }
 
 div.boxButton:active {
@@ -59,13 +64,13 @@ div.boxButton div {
 	font-size: 4vmin;
 	position: absolute;
 	font-family: "Consolas", "Roboto", sans-serif;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none; 
-  -moz-user-select: none;
-  -ms-user-select: none; 
-  user-select: none;
-  cursor: pointer; 
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none; 
+	-moz-user-select: none;
+	-ms-user-select: none; 
+	user-select: none;
+	cursor: pointer; 
 }
 
 div.boxButton div img.symbol {
@@ -93,19 +98,29 @@ div.boxLight {
 	pointer-events: none;
 }
 
-div.retro div.boxLight {
-	transition: opacity 2.5s ease, visibility ease 2.5s;
-}
 
 
 ///////
 
-.lockContainer{
+.oscilloscopeContainer{
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
 	position: absolute;
 	//cursor: pointer;
+}
+
+.dialContainer{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	position: absolute;
+	//cursor: pointer;
+}
+
+.dialContainer:hover {
+	filter: brightness(1.2); /* Aumenta el brillo al pasar el mouse */
+	transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el mouse */
 }
 
 .screenContainer{
@@ -126,6 +141,13 @@ div.dial{
 	background-size: contain;
 	pointer-events: none;
 }
+
+.dial:hover {
+	filter: brightness(1.2); /* Aumenta el brillo al pasar el mouse */
+	//transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el mouse */
+}
+
+
 
 p#rotationNum{
 	position: absolute;

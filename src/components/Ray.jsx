@@ -5,8 +5,6 @@ const Ray = (props) => {
     const canvasRef = useRef();
     const animationRef = useRef();
     const offsetRef = useRef(0);
-
-    // Ref para las props actuales
     const propsRef = useRef(props);
     propsRef.current = props;
 
@@ -63,8 +61,7 @@ const Ray = (props) => {
         const ctx = canvas.getContext("2d");
         const width = propsRef.current.boxWidth * appSettings.rayWidth;
         const height = propsRef.current.boxHeight * appSettings.rayHeight;
-        canvas.width = width;
-        canvas.height = height;
+        canvas.width = width; canvas.height = height;
         ctx.clearRect(0, 0, width, height);
         drawWave(ctx, width, height);
         offsetRef.current += 1;
@@ -72,11 +69,9 @@ const Ray = (props) => {
     };
 
     useEffect(() => {
-        draw(); // Dibuja el primer frame inmediatamente
+        draw(); 
         animationRef.current = requestAnimationFrame(draw);
-        return () => {
-            cancelAnimationFrame(animationRef.current);
-        };
+        return () => { cancelAnimationFrame(animationRef.current); };
     }, []);
 
     useEffect(() => {
@@ -88,19 +83,9 @@ const Ray = (props) => {
     }, [props.boxWidth, props.boxHeight]);
 
     return (
-        <canvas
-            ref={canvasRef}
-            width={props.boxWidth}
-            height={props.boxHeight}
-            style={{
-                position: "absolute",
-                top: "39%",
-                transform: "translate(-50%, -50%)",
-                left: "49.9%",
-                zIndex: 1,
-                pointerEvents: "none",
-            }}
-        ></canvas>
+        <canvas ref={canvasRef} width={props.boxWidth} height={props.boxHeight}
+            style={{ position: "absolute", top: "39%", transform: "translate(-50%, -50%)", left: "49.9%", zIndex: 1, pointerEvents: "none", }}>                
+        </canvas>
     );
 };
 export default Ray;

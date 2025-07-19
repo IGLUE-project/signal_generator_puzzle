@@ -63,70 +63,9 @@ export const DEFAULT_APP_SETTINGS = {
 };
 
 export const SKIN_SETTINGS_RETRO = {
-  background: "images/retro/background.png",
-  backgroundKeypad: "images/background_keypad_retro.png",
-  backgroundKey: "images/background_key_retro.png",
-  
-  backgroundLock : "images/retro/background_lock_retro.png",
-  backgroundDial: "images/retro/dial_retro.png",
-  coloredBackgroundKeys: [
-    "images/background_key_retro_red.png",
-    "images/background_key_retro_green.png",
-    "images/background_key_retro_blue.png",
-    "images/background_key_retro_yellow.png",
-    "images/background_key_retro_orange.png",
-    "images/background_key_retro_pink.png",
-    "images/background_key_retro_cyan.png",
-    "images/background_key_retro_purple.png",
-    "images/background_key_retro_brown.png",
-    "images/background_key_retro_black.png",
-    "images/background_key_retro_gray.png",
-    "images/background_key_retro_white.png",
-  ],
-  backgroundMessage: "images/background_message_retro.png",
-  imageLightOff: "images/retro/light_off_retro.png",
-  imageLightNok: "images/retro/light_nok_retro.png",
-  imageLightOk: "images/retro/light_ok_retro.png",
-  soundBeep: "sounds/beep_retro.wav",
-  soundNok: "sounds/solution_nok_retro.wav",
-  soundOk: "sounds/solution_ok_retro.wav",
-
-  dialTextSize: "9vmin", // Font size for the dial text
-  dialTextColor: "#FFFFFF", // Color for the dial text
-  lightBack: "false"
-
 };
 
 export const SKIN_SETTINGS_FUTURISTIC = {
-  background: "images/futuristic/background_futuristic.png",
-  backgroundKeypad: "images/background_keypad_futuristic.png",
-  backgroundKey: "images/background_key_futuristic.png",
-  
-  backgroundLock : "images/futuristic/background_lock_futuristic.png",
-  backgroundDial: "images/futuristic/dial_futuristic.png",
-  coloredBackgroundKeys: [
-    "images/background_key_futuristic_red.png",
-    "images/background_key_futuristic_green.png",
-    "images/background_key_futuristic_blue.png",
-    "images/background_key_futuristic_yellow.png",
-    "images/background_key_futuristic_orange.png",
-    "images/background_key_futuristic_pink.png",
-    "images/background_key_futuristic_cyan.png",
-    "images/background_key_futuristic_purple.png",
-    "images/background_key_futuristic_brown.png",
-    "images/background_key_futuristic_black.png",
-    "images/background_key_futuristic_gray.png",
-    "images/background_key_futuristic_white.png",
-  ],
-  backgroundMessage: "images/background_message_futuristic.png",
-  imageLightOff: "images/futuristic/light_off_futuristic.png",
-  imageLightNok: "images/futuristic/light_nok_futuristic.png",
-  imageLightOk: "images/futuristic/light_ok_futuristic.png",
-  soundNok: "sounds/solution_nok_futuristic.wav",
-
-  dialTextSize: "9vmin", // Font size for the dial text
-  dialTextColor: "#0fbdfd", // Color for the dial text
-  lightBack:"true", //Para controlar si se muestra la imagen tras el marco del dial
 };
 
 export const ESCAPP_CLIENT_SETTINGS = {
