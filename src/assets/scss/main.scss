@@ -11,19 +11,6 @@ div#screen_main {
 	position: relative;
 }
 
-div#keypad {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-}
-
-div#keypad div.row {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-}
-
 div.boxButton {
 	background-position: center;
 	background-repeat: no-repeat;
@@ -38,53 +25,14 @@ div.boxButton {
 	transition: transform 0.2s ease, filter 0.2s ease;
 }
 div.boxButton:hover {
-	filter: brightness(1.2); /* Aumenta el brillo al pasar el mouse */
-	transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el mouse */
+	filter: brightness(1.2); 
+	transform: scale(1.05); 
 }
 
 div.boxButton:active {
 	transform: scale(0.9);
 }
 
-div.retro div.boxButton {
-  transition: transform 0.4s ease;
-}
-
-div.retro div.boxButton:active {
-	transform: scale(0.85);
-}
-
-div.boxButton div {
-	display: flex;
-	justify-content: center;
-	align-content: center;
-	flex-direction: column;
-
-	text-align: center;
-	font-size: 4vmin;
-	position: absolute;
-	font-family: "Consolas", "Roboto", sans-serif;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none; 
-	-moz-user-select: none;
-	-ms-user-select: none; 
-	user-select: none;
-	cursor: pointer; 
-}
-
-div.boxButton div img.symbol {
-  align-self: center;
-	max-height: 55%;
-  max-width: 55%;
-}
-
-div.retro div.boxButton div {
-  padding-top: 0.5px;
-  font-size: 3.5vmin;
-  font-family: 'Retro';
-  font-weight: bold;
-}
 
 div.boxLight {
 	position: absolute;
@@ -98,16 +46,11 @@ div.boxLight {
 	pointer-events: none;
 }
 
-
-
-///////
-
 .oscilloscopeContainer{
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
 	position: absolute;
-	//cursor: pointer;
 }
 
 .dialContainer{
@@ -115,12 +58,11 @@ div.boxLight {
 	background-repeat: no-repeat;
 	background-size: contain;
 	position: absolute;
-	//cursor: pointer;
 }
 
 .dialContainer:hover {
-	filter: brightness(1.2); /* Aumenta el brillo al pasar el mouse */
-	transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el mouse */
+	filter: brightness(1.2); 
+	transform: scale(1.05); 
 }
 
 .screenContainer{
@@ -135,57 +77,51 @@ div.boxLight {
 }
 
 div.dial{
-	background-image: url("../images/dial.png");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
 	pointer-events: none;
 }
-
 .dial:hover {
-	filter: brightness(1.2); /* Aumenta el brillo al pasar el mouse */
-	//transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el mouse */
+	filter: brightness(1.2); 
 }
-
-
 
 p#rotationNum{
 	position: absolute;
-	top: 50%; // Centra verticalmente
-	left: 50%; // Centra horizontalmente
-	transform: translate(-50%, -50%); // Ajusta el centrado
-	margin: 0; // Elimina el margen del <p>
-	pointer-events: none; // Permite que los eventos del mouse pasen a través del <p>
-	color: black; // Cambia el color del texto
-	user-select: none; // Evita que el texto sea seleccionable
-	font-style: bold; // Aplica el estilo en negrita
+	top: 50%; 
+	left: 50%; 
+	transform: translate(-50%, -50%); 
+	margin: 0; 
+	pointer-events: none; 
+	color: black; 
+	user-select: none; 
+	font-style: bold; 
 	font-family: "Anton", sans-serif;
-	font-size : 4vmin; // Cambia el tamaño de la fuente
+	font-size : 4vmin; 
 }
 
-
 .data-show-container {
-	display: flex; /* Usamos Flexbox */
-	position: absolute; /* Posiciona el contenedor de datos */
-	align-items: center; /* Alinea verticalmente los elementos */
+	display: flex; 
+	position: absolute; 
+	align-items: center; 
 	gap: 3vmin;
 	pointer-events: none; 
-  }
+}
   
-  .data-show {
-	text-align: center; /* Centra el texto dentro de cada columna */
-	font-size: 2.8vmin; // Cambia el tamaño de la fuente
+.data-show {
+	text-align: center; 
+	font-size: 2.8vmin; 
 	color: rgb(171, 255, 155);
-	font-style: bold; // Aplica el estilo en negrita
+	font-style: bold; 
 	font-family: "Press Start 2P", system-ui;
 	pointer-events: none; 
-  }
+}
 
-  .multi-button{
+.multi-button{
 	color:rgb(135, 109, 86);
 	pointer-events:none;
 	font-family: "Press Start 2P", system-ui;
 	margin-top: 12vmin;
 	text-align: bottom;
 	font-size:1.5vmin;
-  }
+}

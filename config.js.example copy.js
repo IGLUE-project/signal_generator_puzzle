@@ -4,7 +4,7 @@ export let ESCAPP_APP_SETTINGS = {
   //Settings that can be specified by the authors
   skin: "STANDARD", //skin can be "STANDARD", "RETRO" or "FUTURISTIC".
   //background: "NONE", //background can be "NONE" or a URL.
-  actionAfterSolve: "SHOW_MESSAGE", //actionAfterSolve can be "NONE" or "SHOW_MESSAGE".
+  actionAfterSolve: "SHOW_MESSAGE", //actionAfterSolve can be "NONE", "SHOW_MESSAGE" or "PLAY_SOUND".
   //message: "Custom message",
   keysType: "NUMBERS", //keys can be "NUMBERS", "LETTERS", "COLORS" or "SYMBOLS".
 

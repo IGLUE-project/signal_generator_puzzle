@@ -8,17 +8,16 @@ const MainScreen = (props) => {
   const { escapp, appSettings, Utils, I18n } = useContext(GlobalContext);
   const [processingSolution, setProcessingSolution] = useState(false);
   const [light, setLight] = useState("off");
-  const [containerWidth, setContainerWidth] = useState(0);//
-  const [containerHeight, setContainerHeight] = useState(0);//
-  const [containerMarginTop, setContainerMarginTop] = useState(0);//
-  const [containerMarginLeft, setContainerMarginLeft] = useState(0);//
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [containerHeight, setContainerHeight] = useState(0);
+  const [containerMarginTop, setContainerMarginTop] = useState(0);
+  const [containerMarginLeft, setContainerMarginLeft] = useState(0);
   const [boxWidth, setBoxWidth] = useState(0);
   const [boxHeight, setBoxHeight] = useState(0);
-  const [lightWidth, setLightWidth] = useState(0); //
-  const [lightHeight, setLightHeight] = useState(0); //
-  const [lightLeft, setLightLeft] = useState(0);//
-  const [lightTop, setLightTop] = useState(0);//
-
+  const [lightWidth, setLightWidth] = useState(0); 
+  const [lightHeight, setLightHeight] = useState(0); 
+  const [lightLeft, setLightLeft] = useState(0);
+  const [lightTop, setLightTop] = useState(0);
   const [frequency, setFrequency] = useState(0);
   const [wavelength, setWavelength] = useState(0);
   const [amplitude, setAmplitude] = useState(0);
@@ -74,21 +73,8 @@ const MainScreen = (props) => {
 
     switch(appSettings.skin){
       case "RETRO":
-        _containerMarginTop = 0;
-        _containerHeight = _lockHeight *0.55;
-        _lightWidth = _lockWidth * 0.18;
-        _lightHeight = _lockHeight *0.18;
-        _lightLeft = _lockWidth * 0;
-        _lightTop =  _lockHeight * -0.14;
         break;
       case "FUTURISTIC":
-        _containerMarginTop = 0;//_lockHeight*0;
-        _containerHeight = _lockHeight *0.605;
-         _lightWidth = _lockWidth*0.9;
-        _lightHeight = _lockHeight*0.6;
-        _boxHeight = _lockHeight * 0.9;
-        _boxWidth = _lockWidth * 0.9;
-
         break;
       default:
         _lightWidth = _lockWidth * 0.08;
@@ -117,7 +103,7 @@ const MainScreen = (props) => {
     }
 
     let audio = document.getElementById("audio_beep");
-    audio.currentTime = 0; // Reinicia el audio
+    audio.currentTime = 0; 
     audio.play();
 
     setProcessingSolution(true);
@@ -125,7 +111,6 @@ const MainScreen = (props) => {
     let solution = "";
     if(appSettings.viewAngle === "FALSE"){
       solution = [waveType, frequency/3, wavelength/3, amplitude/3].join(';');
-      //if (appSettings.dialMode === "MULTI") solution = [waveType, frequency/3, wavelength/3, amplitude/3].join(';');
     }else{
       solution = [waveType, frequencyMapped.toFixed(3), wavelengthMapped.toFixed(3), amplitudeMapped.toFixed(3)].join(';');
     }
@@ -185,7 +170,6 @@ const MainScreen = (props) => {
     const analyser = audioContext.createAnalyser();
     analyser.fftSize = 256;
     const dataArray = new Uint8Array(analyser.frequencyBinCount);
-
     source.connect(analyser);
     analyser.connect(audioContext.destination);
 
@@ -214,7 +198,6 @@ const MainScreen = (props) => {
     backgroundImage += ', url("' + appSettings.background + '")';
   }
 
-
   const  reset = () =>{
     setIsReseting(true);
     setAmplitude(0); 
@@ -226,13 +209,11 @@ const MainScreen = (props) => {
   }
 
   /** Funcion para reproducir una frecuencia, segun la amplitud de la onda */
-  //https://www.cirruslabs.io/blog1/modernized-technology/quick-start-to-generate-tones-in-javascript  
   const playFrequency = (frequency) => {
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     oscillator.type = waveType; // "sine", "square", "triangle", "sawtooth"
-    oscillator.frequency.value = frequency * 1000; // Ajusta según tu escala
-
+    oscillator.frequency.value = frequency * 1000; // Ajustar según la escala
     oscillator.connect(audioContext.destination);
     oscillator.start();
     setTimeout(() => {
@@ -243,7 +224,7 @@ const MainScreen = (props) => {
 
 const changeWaveType = () => {
   let audio = document.getElementById("audio_beep");
-  audio.currentTime = 0; // Reinicia el audio
+  audio.currentTime = 0; 
   audio.play();
   const waveTypes = ["sine", "square", "triangle", "sawtooth"];
   const currentIndex = waveTypes.indexOf(waveType);
@@ -251,7 +232,6 @@ const changeWaveType = () => {
   setWaveType(waveTypes[nextIndex]);
   Utils.log("Wave type changed to", waveTypes[nextIndex]);
 }
-
 
   return (
     <div id="screen_main" className={"screen_content"} style={{ backgroundImage: backgroundImage }}>
@@ -291,9 +271,7 @@ const changeWaveType = () => {
               </svg>
         </div>}
         <div className="screenContainer" style={{marginTop: boxHeight*appSettings.screenContainerMarginTop,
-            width: containerWidth*appSettings.screenContainerWidth, height: containerHeight*appSettings.screenContainerHeight, }}>
-              <p></p>
-        </div>
+            width: containerWidth*appSettings.screenContainerWidth, height: containerHeight*appSettings.screenContainerHeight, }}/>
                 
         {light==="ok" && <div className="screenContainer" style={{backgroundImage: 'url('+appSettings.backgroundOk+')',  marginTop: boxHeight*appSettings.screenContainerMarginTop,
             width: containerWidth*appSettings.screenContainerWidth, height: containerHeight*appSettings.screenContainerHeight, }}>
