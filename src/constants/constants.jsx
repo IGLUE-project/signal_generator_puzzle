@@ -18,6 +18,9 @@ export const DEFAULT_APP_SETTINGS = {
   soundOk: "sounds/solution_ok.mp3",
   soundDial: "sounds/spin.wav",
   soundAfterSolve: "sounds/after_solve.mp3", // Sound played after solving the puzzle
+  dialMode: "MULTI", // Dial mode can be "NORMAL" or "MULTI"
+
+  //Developer settings
   dialWidth: 0.7, 
   dialHeight: 0.7, 
   dialTextSize: "2.5vmin", 
@@ -30,7 +33,6 @@ export const DEFAULT_APP_SETTINGS = {
   buttonMarginLeft: 0.8, // Margin from the left of the box to the button in percentage of box width
   dialsGap: 0.19, // Gap between dials in percentage of box width
   dialsNames: ["F", "W", "A",], // Names for the dials
-  dialMode: "MULTI", // Dial mode can be "NORMAL" or "MULTI"
   minFrequency: 0.2, // Minimum frequency for the ray
   maxFrequency: 0.5, // Maximum frequency for the ray
   minAmplitude: 25, // Minimum amplitude for the ray
@@ -50,9 +52,6 @@ export const DEFAULT_APP_SETTINGS = {
   dataContainerMarginTop: 0.22,
   multiTextColor: "rgb(135, 109, 86)",
 };
-
-export const SKIN_SETTINGS_RETRO = {};
-export const SKIN_SETTINGS_FUTURISTIC = {};
 
 export const ESCAPP_CLIENT_SETTINGS = {
   imagesPath:"./images/",

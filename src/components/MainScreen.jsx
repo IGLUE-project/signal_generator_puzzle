@@ -34,8 +34,6 @@ const MainScreen = (props) => {
 
   const [isReseting, setIsReseting] = useState(false); // Estado para saber si se está reiniciando el lock
   const [audioAmplitude, setAudioAmplitude] = useState(amplitude);
-  //
-
 
   useEffect(() => {
     handleResize();
@@ -68,8 +66,6 @@ const MainScreen = (props) => {
     let _lightHeight;
     let _lightLeft;
     let _lightTop;
-
-
 
     switch(appSettings.skin){
       case "RETRO":

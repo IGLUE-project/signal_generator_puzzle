@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 div#screen_main {
 	background-position: center;
 	background-repeat: no-repeat;
@@ -25,14 +26,12 @@ div.boxButton {
 	transition: transform 0.2s ease, filter 0.2s ease;
 }
 div.boxButton:hover {
-	filter: brightness(1.2); 
-	transform: scale(1.05); 
+	filter: brightness(1.2);
 }
 
 div.boxButton:active {
-	transform: scale(0.9);
+	transform: scale(0.95);
 }
-
 
 div.boxLight {
 	position: absolute;
@@ -62,7 +61,6 @@ div.boxLight {
 
 .dialContainer:hover {
 	filter: brightness(1.2); 
-	transform: scale(1.05); 
 }
 
 .screenContainer{
