@@ -38,7 +38,7 @@ export const DEFAULT_APP_SETTINGS = {
   minFrequency: 0.1, // Minimum frequency for the ray
   maxFrequency: 0.5, // Maximum frequency for the ray
   minAmplitude: 0, // Minimum amplitude for the ray
-  maxAmplitude: 75, // Maximum amplitude for the ray
+  maxAmplitude: 50, // Maximum amplitude for the ray
   minWavelength: 10, // Minimum wavelength for the ray
   maxWavelength: 80, // Maximum wavelength for the ray
 

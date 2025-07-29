@@ -15,18 +15,19 @@ const Ray = (props) => {
         const centerX = width / 2;
 
         const maxAmplitude = propsRef.current.amplitude * (height / 200);
-        const maxWavelength = propsRef.current.wavelength * (width / 500);
+        const fixedWavelength = 10 * (width / 500); // Wavelength fijado 
         const maxFrequency = propsRef.current.frequency / 1;
+        const phaseOffset = (propsRef.current.wavelength * Math.PI) / 180; // Conviert fase de grados a radianes
 
         for (let x = 0; x < width; x++) {
             const distanceFromCenter = Math.abs(x - centerX) / centerX;
             const scale = Math.sin((1 - distanceFromCenter) * Math.PI / 2);
 
             const scaledAmplitude = maxAmplitude * scale;
-            const scaledWavelength = maxWavelength * scale;
+            const scaledWavelength = fixedWavelength * scale;
             const scaledFrequency = maxFrequency * scale;
 
-            const phase = (2 * Math.PI * scaledFrequency * (x + offsetRef.current)) / scaledWavelength;
+            const phase = (2 * Math.PI * scaledFrequency * (x + offsetRef.current)) / scaledWavelength + phaseOffset;
 
             let waveValue = 0;
             if (propsRef.current.waveType === "square") {
@@ -64,7 +65,7 @@ const Ray = (props) => {
         canvas.width = width; canvas.height = height;
         ctx.clearRect(0, 0, width, height);
         drawWave(ctx, width, height);
-        offsetRef.current += 1;
+        offsetRef.current += propsRef.current.paused ? 0 : 1;//1;
         animationRef.current = requestAnimationFrame(draw);
     };
 
