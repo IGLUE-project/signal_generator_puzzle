@@ -23,7 +23,7 @@ export const DEFAULT_APP_SETTINGS = {
   //Developer settings
   dialWidth: 0.7, 
   dialHeight: 0.7, 
-  dialTextSize: "2.5vmin", 
+  dialTextSize: "0.038", 
   dialTextColor: "#000000", // Color for the dial text
   rayWidth: 0.59, 
   rayHeight: 0.6, 
@@ -41,7 +41,7 @@ export const DEFAULT_APP_SETTINGS = {
   maxWavelength: 80, // Maximum wavelength for the ray
   svgSize: '25vmin',
   viewAngle: "FALSE", //FALSE, TRUE
-  textGap: "3.5vmin",
+  textGap: "0.09",
   screenContainerWidth: 0.543, // Width of the screen container
   screenContainerHeight: 0.543, // Height of the screen container
   screenContainerMarginTop: -0.256, // Margin from the top of the box to the screen container in percentage of box height
@@ -49,8 +49,8 @@ export const DEFAULT_APP_SETTINGS = {
   multiButtonHeight: 0.1, // Relative height of the multi button compared to the box height
   multiButtonMarginTop: 0.75, // Margin from the top of the box to the multi button in percentage of box height
   multiButtonMarginLeft: 0.16, // Margin from the left of the box to the multi button in percentage of box width
-  dataContainerMarginTop: 0.22,
-  multiTextColor: "rgb(135, 109, 86)",
+  dataContainerMarginTop: 0.25,
+  multiTextColor: "rgba(161, 106, 58, 1)",
 };
 
 export const ESCAPP_CLIENT_SETTINGS = {

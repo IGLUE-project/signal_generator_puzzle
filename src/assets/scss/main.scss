@@ -112,7 +112,11 @@ p#rotationNum{
 	color: rgb(171, 255, 155);
 	font-style: bold; 
 	font-family: "Press Start 2P", system-ui;
-	pointer-events: none; 
+	pointer-events: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
 }
 
 .multi-button{

@@ -257,7 +257,7 @@ const changeWaveType = () => {
             {appSettings.dialMode==="MULTI" && <div className={"boxButton boxButton"} onClick={() => !processingSolution && changeWaveType()} 
               style={{ width: boxWidth * appSettings.multiButtonWidth , height: boxHeight *appSettings.multiButtonHeight, top: boxHeight * appSettings.multiButtonMarginTop, left: boxWidth * appSettings.multiButtonMarginLeft, 
               backgroundImage: 'url("' + appSettings.modeButton + '")', 
-            }}><p className='multi-button' style={{ marginTop: "12vmin", textAlign: "bottom", fontSize:"1.5vmin", color:appSettings.multiTextColor}}>MODE</p></div>}
+            }}><p className='multi-button' style={{ marginTop: "12vmin", textAlign: "bottom", fontSize:"1.5vmin", color:appSettings.multiTextColor}}>TYPE</p></div>}
         </div>
         {light==="nok" && <div className="screenContainer" style={{backgroundImage: 'url('+appSettings.backgroundNok+')',  marginTop: boxHeight*appSettings.screenContainerMarginTop,
             width: containerWidth*appSettings.screenContainerWidth, height: containerHeight*appSettings.screenContainerHeight, }}>
@@ -277,10 +277,10 @@ const changeWaveType = () => {
               </svg>
         </div>}
 
-       {light==="off" && <div className="data-show-container" style={{marginTop: boxHeight * appSettings.dataContainerMarginTop, alignItems:"center", justifyContent: "center", height: boxHeight, width: boxWidth, gap: appSettings.textGap}}>
-              <p className='data-show'style={{fontSize: appSettings.dialTextSize, transform: "rotate(6deg)"}}>{appSettings.dialsNames[0]}:{appSettings.viewAngle==="FALSE" ? frequency/3 : frequencyMapped.toFixed(3)}</p>
-              <p className='data-show' style={{fontSize: appSettings.dialTextSize, marginTop: "6%"}}>{appSettings.dialsNames[1]}:{appSettings.viewAngle==="FALSE" ? wavelength/3 : wavelengthMapped.toFixed(3)}</p>
-              <p className='data-show' style={{fontSize: appSettings.dialTextSize, transform: "rotate(-6deg)"}}>{appSettings.dialsNames[2]}:{appSettings.viewAngle==="FALSE" ? amplitude/3 : amplitudeMapped.toFixed(3)}</p>
+       {light==="off" && <div className="data-show-container" style={{marginTop: boxHeight * appSettings.dataContainerMarginTop, alignItems:"center", justifyContent: "center", height: boxHeight, width: boxWidth, gap: boxWidth*appSettings.textGap}}>
+              <p className='data-show'style={{fontSize: boxHeight * appSettings.dialTextSize, transform: "rotate(10deg)", maxWidth: '7vmin'}}>{appSettings.dialsNames[0]}:{appSettings.viewAngle==="FALSE" ? frequency/3 : frequencyMapped.toFixed(3)}</p>
+              <p className='data-show' style={{fontSize: boxHeight * appSettings.dialTextSize, marginTop: "6%",maxWidth: '7vmin'}}>{appSettings.dialsNames[1]}:{appSettings.viewAngle==="FALSE" ? wavelength/3 : wavelengthMapped.toFixed(3)}</p>
+              <p className='data-show' style={{fontSize: boxHeight * appSettings.dialTextSize, transform: "rotate(-10deg)", maxWidth: '7vmin'}}>{appSettings.dialsNames[2]}:{appSettings.viewAngle==="FALSE" ? amplitude/3 : amplitudeMapped.toFixed(3)}</p>
         </div>}
 
       <audio id="audio_beep" src={appSettings.soundBeep} autostart="false" preload="auto" />
