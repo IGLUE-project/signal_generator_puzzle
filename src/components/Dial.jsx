@@ -5,7 +5,7 @@ import { GlobalContext } from "./GlobalContext";
 const  Dial = ( props ) => {
   const {  appSettings } = useContext(GlobalContext);
     // Configuración de pasos: por defecto 50 pasos, pero se puede personalizar
-    const maxSteps = props.maxSteps || 25;
+    const maxSteps = props.maxSteps;
     const degreesPerStep = 360 / maxSteps;
     
     const [initialRotation, setInitialRotation] = useState(0); // Ángulo inicial del lock

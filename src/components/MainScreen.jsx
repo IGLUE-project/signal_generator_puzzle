@@ -33,7 +33,10 @@ const MainScreen = (props) => {
   const amplitudeMaxSteps = 25; // Puedes cambiar este valor para la amplitud
   
   // Función helper para convertir ángulo a paso
-  const angleToStep = (angle, maxSteps) => Math.round(angle / (360/maxSteps));
+  const angleToStep = (angle, maxSteps) => {
+    return Math.round(angle / (360/maxSteps));
+
+  };
   const frequencyMapped = mapRange(angleToStep(frequency, frecuencyMaxSteps), 0, frecuencyMaxSteps - 1, appSettings.minFrequency, appSettings.maxFrequency);
   const wavelengthMapped = mapRange(angleToStep(wavelength, wavelengthMaxSteps), 0, wavelengthMaxSteps - 1, appSettings.minWavelength, appSettings.maxWavelength);
   const amplitudeMapped = mapRange(angleToStep(amplitude, amplitudeMaxSteps), 0, amplitudeMaxSteps - 1, appSettings.minAmplitude, appSettings.maxAmplitude);
@@ -110,12 +113,12 @@ const MainScreen = (props) => {
     audio.play();
 
     setProcessingSolution(true);
-    Utils.log("Check solution", [ angleToStep(frequency, frecuencyMaxSteps), angleToStep(wavelength, wavelengthMaxSteps), angleToStep(amplitude, amplitudeMaxSteps)]);
+    Utils.log("Check solution", [ angleToStep(frequency, frecuencyMaxSteps), angleToStep(amplitude, amplitudeMaxSteps), angleToStep(wavelength, wavelengthMaxSteps)]);
     let solution = "";
     if(appSettings.viewAngle === "FALSE"){
-      solution = [waveType, angleToStep(frequency, frecuencyMaxSteps), angleToStep(wavelength, wavelengthMaxSteps), angleToStep(amplitude, amplitudeMaxSteps)].join(';');
+      solution = [waveType, angleToStep(frequency, frecuencyMaxSteps), angleToStep(amplitude, amplitudeMaxSteps), angleToStep(wavelength, wavelengthMaxSteps)].join(';');
     }else{
-      solution = [waveType, frequencyMapped.toFixed(3), wavelengthMapped.toFixed(3), amplitudeMapped.toFixed(3)].join(';');
+      solution = [waveType, frequencyMapped.toFixed(3), amplitudeMapped.toFixed(3), wavelengthMapped.toFixed(3)].join(';');
     }
     console.log("Check solution", solution);
     escapp.checkNextPuzzle(solution, {}, (success, erState) => {
@@ -242,13 +245,13 @@ const changeWaveType = () => {
             <div style={{  display: "flex",position:'absolute',alignItems: "center",marginTop: containerMarginTop, marginLeft: containerMarginLeft}}>
                 <Dial id={"dial-frequency"} boxWidth={boxWidth} boxHeight={boxHeight} checking={processingSolution} 
                   rotationAngle={frequency} setRotationAngle={setFrequency} isReseting={isReseting}
-                  xPosition={boxWidth*appSettings.dialsGap*1} name={appSettings.dialsNames[0]} maxSteps={frecuencyMaxSteps}/>
-                <Dial id={"dial-wavelength"}  boxWidth={boxWidth} boxHeight={boxHeight} checking={processingSolution} 
-                  rotationAngle={wavelength} setRotationAngle={setWavelength} isReseting={isReseting} 
-                  xPosition={boxWidth*appSettings.dialsGap*2 } name={appSettings.dialsNames[1]} maxSteps={wavelengthMaxSteps}/>
+                  xPosition={boxWidth*appSettings.dialsGap*1} name={appSettings.dialsNames[0]} maxSteps={frecuencyMaxSteps}/>                  
                 <Dial id={"dial-amplitude"}  boxWidth={boxWidth} boxHeight={boxHeight} checking={processingSolution} 
                   rotationAngle={amplitude} setRotationAngle={setAmplitude} isReseting={isReseting}
-                  xPosition={boxWidth*appSettings.dialsGap*3} name={appSettings.dialsNames[2]} maxSteps={amplitudeMaxSteps}/>              
+                  xPosition={boxWidth*appSettings.dialsGap*2} name={appSettings.dialsNames[1]} maxSteps={amplitudeMaxSteps}/> 
+                <Dial id={"dial-wavelength"}  boxWidth={boxWidth} boxHeight={boxHeight} checking={processingSolution} 
+                  rotationAngle={wavelength} setRotationAngle={setWavelength} isReseting={isReseting} 
+                  xPosition={boxWidth*appSettings.dialsGap*3 } name={appSettings.dialsNames[2]} maxSteps={wavelengthMaxSteps}/>             
             </div>    
             {light!=="nok" && <Ray boxHeight={boxHeight} boxWidth={boxWidth} checking={processingSolution} waveType={waveType}
                   frequency={frequencyMapped} amplitude={light === "ok" ? audioAmplitude : amplitudeMapped} wavelength={wavelengthMapped}/>}
@@ -285,9 +288,9 @@ const changeWaveType = () => {
         </div>}
 
        {light==="off" && <div className="data-show-container" style={{marginTop: boxHeight * appSettings.dataContainerMarginTop, alignItems:"center", justifyContent: "center", height: boxHeight, width: boxWidth, gap: boxWidth*appSettings.textGap}}>
-              <p className='data-show'style={{fontSize: boxHeight * appSettings.dialTextSize, transform: "rotate(8deg)", maxWidth: '7vmin'}}>{appSettings.dialsNames[0]}:{appSettings.viewAngle==="FALSE" ? angleToStep(frequency, frecuencyMaxSteps) : frequencyMapped.toFixed(3)}</p>
-              <p className='data-show' style={{fontSize: boxHeight * appSettings.dialTextSize, marginTop: "5%",maxWidth: '7vmin'}}>{appSettings.dialsNames[1]}:{appSettings.viewAngle==="FALSE" ? angleToStep(wavelength, wavelengthMaxSteps) : wavelengthMapped.toFixed(3)}</p>
-              <p className='data-show' style={{fontSize: boxHeight * appSettings.dialTextSize, transform: "rotate(-8deg)", maxWidth: '7vmin'}}>{appSettings.dialsNames[2]}:{appSettings.viewAngle==="FALSE" ? angleToStep(amplitude, amplitudeMaxSteps) : amplitudeMapped.toFixed(3)}</p>
+              <p className='data-show'style={{fontSize: boxHeight * appSettings.dialTextSize, transform: "rotate(8deg)", maxWidth: '7vmin'}}>{appSettings.dialsNames[0]}:{appSettings.viewAngle==="FALSE" ? angleToStep(frequency, frecuencyMaxSteps) : frequencyMapped.toFixed(3)}</p>              
+              <p className='data-show' style={{fontSize: boxHeight * appSettings.dialTextSize, marginTop: "5%", maxWidth: '7vmin'}}>{appSettings.dialsNames[1]}:{appSettings.viewAngle==="FALSE" ? angleToStep(amplitude, amplitudeMaxSteps) : amplitudeMapped.toFixed(3)}</p>
+              <p className='data-show' style={{fontSize: boxHeight * appSettings.dialTextSize, transform: "rotate(-8deg)", maxWidth: '7vmin'}}>{appSettings.dialsNames[2]}:{appSettings.viewAngle==="FALSE" ? angleToStep(wavelength, wavelengthMaxSteps) : wavelengthMapped.toFixed(3)}</p>
         </div>}
 
       <audio id="audio_beep" src={appSettings.soundBeep} autostart="false" preload="auto" />
