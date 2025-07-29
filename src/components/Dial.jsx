@@ -4,7 +4,7 @@ import { GlobalContext } from "./GlobalContext";
 
 const  Dial = ( props ) => {
   const {  appSettings } = useContext(GlobalContext);
-    // Configuración de pasos: por defecto 50 pasos, pero se puede personalizar
+
     const maxSteps = props.maxSteps;
     const degreesPerStep = 360 / maxSteps;
     
@@ -20,11 +20,9 @@ const  Dial = ( props ) => {
         const angleDifference = normalizeAngleDifference(rounded - startAngle);
         const newRotation = normalizeAngle(initialRotation + angleDifference);
         
-        // Convertir ángulos a pasos para la comparación
         const currentStep = Math.round(props.rotationAngle / degreesPerStep);
         const newStep = Math.round(newRotation / degreesPerStep);
-        
-        // Usar la misma lógica que el código original pero con pasos
+
         const rotationDir = getRotationDirection(currentStep, newStep);
         
         if(props.rotationAngle === newRotation) return; // No actualiza si el ángulo no ha cambiado
@@ -57,27 +55,20 @@ const  Dial = ( props ) => {
         let angle = radians * (180 / Math.PI);  
         if (angle < 0) {
           angle += 360;}
-        // Redondear al grado más cercano según los pasos configurados
         return Math.round(angle / degreesPerStep) * degreesPerStep; 
       }
 
     function getRotationDirection(prevStep, newStep) {
-        // Simplificar la detección de dirección como en el código original
         const diff = (newStep - prevStep + maxSteps) % maxSteps;
         if (diff === 0) return null;
         return diff < maxSteps / 2;
     }
 
-    // Función helper para obtener el paso actual (0 a maxSteps-1)
-    const getCurrentStep = () => {
-        return Math.round(props.rotationAngle / degreesPerStep);
-    };
-
     const normalizeAngleDifference = (angle) => {
         return ((angle + 180) % 360) - 180;
     };    
     const normalizeAngle = (angle) => {
-        return ((angle % 360) + 360) % 360; // Asegura que el ángulo esté entre 0 y 360
+        return ((angle % 360) + 360) % 360; 
     };
 
     const reset = () => {
@@ -111,7 +102,7 @@ const  Dial = ( props ) => {
               transform: `rotate(${props.rotationAngle}deg)`, 
               transition: props.isReseting ? "transform 2.5s ease" : "none", // Transición suavedurante el reset
             }}>
-              <p id="rotationNum" className='rotationNum' onDragStart={(event) => event.preventDefault()} >{props.name}</p></div>
+              <p id="rotationNum" className='rotationNum' onDragStart={(event) => event.preventDefault()} style={{fontSize: props.boxHeight * appSettings.dialTextSize}}>{props.name}</p></div>
               <audio id="audio_wheel" src="sounds/spin.wav" autostart="false" preload="auto" />    
         </div>
     );

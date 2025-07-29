@@ -27,12 +27,12 @@ const MainScreen = (props) => {
     return min2 + ((value - min1) * (max2 - min2)) / (max1 - min1);
   };
   
-  // Configuración de pasos para cada dial
-  const frecuencyMaxSteps = 50; // Puedes cambiar este valor para la frecuencia
-  const wavelengthMaxSteps = 25; // Puedes cambiar este valor para la longitud de onda
-  const amplitudeMaxSteps = 25; // Puedes cambiar este valor para la amplitud
   
-  // Función helper para convertir ángulo a paso
+  const frecuencyMaxSteps = 50; 
+  const wavelengthMaxSteps = 24; 
+  const amplitudeMaxSteps = 25; 
+  
+  // convertir ángulo a paso
   const angleToStep = (angle, maxSteps) => {
     return Math.round(angle / (360/maxSteps));
 
@@ -288,9 +288,9 @@ const changeWaveType = () => {
         </div>}
 
        {light==="off" && <div className="data-show-container" style={{marginTop: boxHeight * appSettings.dataContainerMarginTop, alignItems:"center", justifyContent: "center", height: boxHeight, width: boxWidth, gap: boxWidth*appSettings.textGap}}>
-              <p className='data-show'style={{fontSize: boxHeight * appSettings.dialTextSize, transform: "rotate(8deg)", maxWidth: '7vmin'}}>{appSettings.dialsNames[0]}:{appSettings.viewAngle==="FALSE" ? angleToStep(frequency, frecuencyMaxSteps) : frequencyMapped.toFixed(3)}</p>              
-              <p className='data-show' style={{fontSize: boxHeight * appSettings.dialTextSize, marginTop: "5%", maxWidth: '7vmin'}}>{appSettings.dialsNames[1]}:{appSettings.viewAngle==="FALSE" ? angleToStep(amplitude, amplitudeMaxSteps) : amplitudeMapped.toFixed(3)}</p>
-              <p className='data-show' style={{fontSize: boxHeight * appSettings.dialTextSize, transform: "rotate(-8deg)", maxWidth: '7vmin'}}>{appSettings.dialsNames[2]}:{appSettings.viewAngle==="FALSE" ? angleToStep(wavelength, wavelengthMaxSteps) : wavelengthMapped.toFixed(3)}</p>
+              <p className='data-show'style={{fontSize: boxHeight * appSettings.screenTextSize, transform: "rotate(8deg)",maxWidth:"7vmin", minWidth: '7vmin'}}>{appSettings.dialsNames[0]}:{appSettings.viewAngle==="FALSE" ? angleToStep(frequency, frecuencyMaxSteps) : frequencyMapped.toFixed(3)}</p>              
+              <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize, marginTop: "6%",maxWidth:"7vmin", minWidth: '7vmin'}}>{appSettings.dialsNames[1]}:{appSettings.viewAngle==="FALSE" ? angleToStep(amplitude, amplitudeMaxSteps) : amplitudeMapped.toFixed(3)}</p>
+              <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize, transform: "rotate(-8deg)", maxWidth:"7vmin"}}>{appSettings.dialsNames[2]}:{appSettings.viewAngle==="FALSE" ? angleToStep(wavelength, wavelengthMaxSteps)*15 : wavelengthMapped.toFixed(3)}</p>
         </div>}
 
       <audio id="audio_beep" src={appSettings.soundBeep} autostart="false" preload="auto" />

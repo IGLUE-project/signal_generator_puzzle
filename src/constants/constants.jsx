@@ -23,7 +23,8 @@ export const DEFAULT_APP_SETTINGS = {
   //Developer settings
   dialWidth: 0.7, 
   dialHeight: 0.7, 
-  dialTextSize: "0.038", 
+  dialTextSize: "0.065", 
+  screenTextSize: "0.042",
   dialTextColor: "#000000", // Color for the dial text
   rayWidth: 0.59, 
   rayHeight: 0.6, 
@@ -37,13 +38,13 @@ export const DEFAULT_APP_SETTINGS = {
   minFrequency: 0.1, // Minimum frequency for the ray
   maxFrequency: 0.5, // Maximum frequency for the ray
   minAmplitude: 0, // Minimum amplitude for the ray
-  maxAmplitude: 74, // Maximum amplitude for the ray
+  maxAmplitude: 75, // Maximum amplitude for the ray
   minWavelength: 10, // Minimum wavelength for the ray
   maxWavelength: 80, // Maximum wavelength for the ray
 
   svgSize: '25vmin',
   viewAngle: "FALSE", //FALSE, TRUE
-  textGap: "0.09",
+  textGap: "0.1",
   screenContainerWidth: 0.543, // Width of the screen container
   screenContainerHeight: 0.543, // Height of the screen container
   screenContainerMarginTop: -0.256, // Margin from the top of the box to the screen container in percentage of box height
@@ -51,7 +52,7 @@ export const DEFAULT_APP_SETTINGS = {
   multiButtonHeight: 0.1, // Relative height of the multi button compared to the box height
   multiButtonMarginTop: 0.75, // Margin from the top of the box to the multi button in percentage of box height
   multiButtonMarginLeft: 0.16, // Margin from the left of the box to the multi button in percentage of box width
-  dataContainerMarginTop: 0.25,
+  dataContainerMarginTop: 0.23,
   multiTextColor: "rgba(161, 106, 58, 1)",
 };
 
