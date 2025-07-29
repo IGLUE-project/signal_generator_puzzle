@@ -32,10 +32,10 @@ export const DEFAULT_APP_SETTINGS = {
   buttonMarginTop: 0.85, // Margin from the top of the box to the button in percentage of box height
   buttonMarginLeft: 0.8, // Margin from the left of the box to the button in percentage of box width
   dialsGap: 0.19, // Gap between dials in percentage of box width
-  dialsNames: ["F", "W", "A",], // Names for the dials
+  dialsNames: ["F", "W", "Φ"], // Names for the dials
   minFrequency: 0.2, // Minimum frequency for the ray
   maxFrequency: 0.5, // Maximum frequency for the ray
-  minAmplitude: 25, // Minimum amplitude for the ray
+  minAmplitude: 0, // Minimum amplitude for the ray
   maxAmplitude: 80, // Maximum amplitude for the ray
   minWavelength: 10, // Minimum wavelength for the ray
   maxWavelength: 80, // Maximum wavelength for the ray

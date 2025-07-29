@@ -286,7 +286,7 @@ const changeWaveType = () => {
       <audio id="audio_beep" src={appSettings.soundBeep} autostart="false" preload="auto" />
       <audio id="audio_failure" src={appSettings.soundNok} autostart="false" preload="auto" />
       <audio id="audio_success" src={appSettings.soundOk} autostart="false" preload="auto" />
-      <audio id="audio_post_success" src={appSettings.soundAfterSolve} autostart="false" preload="auto" />
+      {appSettings.actionAfterSolve === "PLAY_SOUND" && <audio id="audio_post_success" src={I18n.getTrans("i.sound")} autostart="false" preload="auto" />}
 
  
     </div>);
