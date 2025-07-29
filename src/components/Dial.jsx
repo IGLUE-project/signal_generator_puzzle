@@ -4,10 +4,14 @@ import { GlobalContext } from "./GlobalContext";
 
 const  Dial = ( props ) => {
   const {  appSettings } = useContext(GlobalContext);
+    // Configuración de pasos: por defecto 50 pasos, pero se puede personalizar
+    const maxSteps = props.maxSteps || 25;
+    const degreesPerStep = 360 / maxSteps;
+    
     const [initialRotation, setInitialRotation] = useState(0); // Ángulo inicial del lock
     const [isMouseDown, setIsMouseDown] = useState(false); // Estado para saber si el mouse está presionado
     const [startAngle, setStartAngle] = useState(0); // Ángulo inicial del ratón
-    const [rotationDirection, setRotationDirection] = useState(false); // Dirección de rotación (horario o antihorario)
+   // const [rotationDirection, setRotationDirection] = useState(false); // Dirección de rotación (horario o antihorario)
 
     const handleMouseMove = (event) => {
         if (!isMouseDown || props.checking || props.isReseting) return ;   
@@ -15,10 +19,17 @@ const  Dial = ( props ) => {
         let rounded = calculateAngle(event); 
         const angleDifference = normalizeAngleDifference(rounded - startAngle);
         const newRotation = normalizeAngle(initialRotation + angleDifference);
-        const rotationDir = getRotationDirection(props.rotationAngle/6, newRotation/6);
+        
+        // Convertir ángulos a pasos para la comparación
+        const currentStep = Math.round(props.rotationAngle / degreesPerStep);
+        const newStep = Math.round(newRotation / degreesPerStep);
+        
+        // Usar la misma lógica que el código original pero con pasos
+        const rotationDir = getRotationDirection(currentStep, newStep);
+        
         if(props.rotationAngle === newRotation) return; // No actualiza si el ángulo no ha cambiado
-        if(props.rotationAngle/3===119 && rotationDir) return; 
-        if(props.rotationAngle/3===0 && !rotationDir) return;
+        if(currentStep === (maxSteps - 1) && rotationDir) return; // En el paso máximo y girando hacia adelante
+        if(currentStep === 0 && !rotationDir) return; // En el paso 0 y girando hacia atrás
 
         props.setRotationAngle(newRotation);     
         audio.play();
@@ -46,14 +57,21 @@ const  Dial = ( props ) => {
         let angle = radians * (180 / Math.PI);  
         if (angle < 0) {
           angle += 360;}
-        return Math.round(angle / 3) * 3; 
+        // Redondear al grado más cercano según los pasos configurados
+        return Math.round(angle / degreesPerStep) * degreesPerStep; 
       }
 
-    function getRotationDirection(prev, curr) {
-        const diff = (curr - prev + 60) % 60;
-        if (diff === 0) return '';
-        return diff < 30 ;
+    function getRotationDirection(prevStep, newStep) {
+        // Simplificar la detección de dirección como en el código original
+        const diff = (newStep - prevStep + maxSteps) % maxSteps;
+        if (diff === 0) return null;
+        return diff < maxSteps / 2;
     }
+
+    // Función helper para obtener el paso actual (0 a maxSteps-1)
+    const getCurrentStep = () => {
+        return Math.round(props.rotationAngle / degreesPerStep);
+    };
 
     const normalizeAngleDifference = (angle) => {
         return ((angle + 180) % 360) - 180;
@@ -64,7 +82,7 @@ const  Dial = ( props ) => {
 
     const reset = () => {
         setStartAngle(0);
-        setRotationDirection("");
+        //setRotationDirection("");
     }
 
     useEffect(() => {    
