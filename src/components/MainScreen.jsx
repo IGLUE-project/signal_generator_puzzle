@@ -236,6 +236,7 @@ const MainScreen = (props) => {
 const changeWaveType = () => {
   
   let audio = document.getElementById("audio_beep");
+  audio.onended = null;
   audio.currentTime = 0; 
   audio.play();
   if(!powerOn)return;
