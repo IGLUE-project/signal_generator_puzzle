@@ -27,7 +27,7 @@ export const DEFAULT_APP_SETTINGS = {
   //Developer settings
   dialWidth: 0.7, 
   dialHeight: 0.7, 
-  dialTextSize: "0.065", 
+  dialTextSize: "0.055", 
   screenTextSize: "0.042",
   dialTextColor: "#000000", // Color for the dial text
   rayWidth: 0.59, 
@@ -38,17 +38,16 @@ export const DEFAULT_APP_SETTINGS = {
   buttonMarginLeft: 0.8, // Margin from the left of the box to the button in percentage of box width
   dialsGap: 0.19, // Gap between dials in percentage of box width
   dialsNames: ["F", "A", "Φ"], // Names for the dials
+  screenTextNames: ["F", "A", "ɸ"], // Names for the screen text
 
-  minFrequency: 0.1, // Minimum frequency for the ray
-  maxFrequency: 0.5, // Maximum frequency for the ray
+  minFrequency: 0.05, // Minimum frequency for the ray
+  maxFrequency: 0.3, // Maximum frequency for the ray
   minAmplitude: 1, // Minimum amplitude for the ray
-  maxAmplitude: 50, // Maximum amplitude for the ray
-  minWavelength: 10, // Minimum wavelength for the ray
-  maxWavelength: 80, // Maximum wavelength for the ray
+  maxAmplitude: 65, // Maximum amplitude for the ray
 
   svgSize: '25vmin',
   viewAngle: "FALSE", //FALSE, TRUE
-  textGap: "0.1",
+  textGap: 0.085,
   screenContainerWidth: 0.543, // Width of the screen container
   screenContainerHeight: 0.543, // Height of the screen container
   screenContainerMarginTop: -0.256, // Margin from the top of the box to the screen container in percentage of box height
@@ -56,7 +55,8 @@ export const DEFAULT_APP_SETTINGS = {
   multiButtonHeight: 0.1, // Relative height of the multi button compared to the box height
   multiButtonMarginTop: 0.75, // Margin from the top of the box to the multi button in percentage of box height
   multiButtonMarginLeft: 0.16, // Margin from the left of the box to the multi button in percentage of box width
-  dataContainerMarginTop: 0.23,
+  dataContainerMarginTop: 0.235,
+  dataContainerMarginLeft: -0.04, // Margin from the left of the box to the data container in percentage of box width
   multiTextColor: "rgba(161, 106, 58, 1)",
 };
 

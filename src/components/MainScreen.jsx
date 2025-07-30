@@ -34,7 +34,7 @@ const MainScreen = (props) => {
   //Maximo de cada dial
   const frecuencyMaxSteps = 50; 
   const phaseMaxSteps = 24; // Fase de 0 a 360 grados
-  const amplitudeMaxSteps = 25; 
+  const amplitudeMaxSteps = 26; 
  
   const angleToStep = (angle, maxSteps) => {
     return Math.round(angle / (360/maxSteps));
@@ -119,7 +119,7 @@ const MainScreen = (props) => {
     
 
     setProcessingSolution(true);
-    Utils.log("Check solution", [ angleToStep(frequency, frecuencyMaxSteps), angleToStep(amplitude, amplitudeMaxSteps), angleToStep(phase, phaseMaxSteps)*15]);
+    Utils.log("Check solution", [ angleToStep(frequency, frecuencyMaxSteps)+1, angleToStep(amplitude, amplitudeMaxSteps)+1, angleToStep(phase, phaseMaxSteps)*15]);
     let solution = "";
     if(appSettings.viewAngle === "FALSE"){ //Esto no se si quitarlo
       solution = [waveType, angleToStep(frequency, frecuencyMaxSteps), angleToStep(amplitude, amplitudeMaxSteps), angleToStep(phase, phaseMaxSteps)*15].join(';');
@@ -282,13 +282,13 @@ const powerClick = () => {
             <div style={{  display: "flex",position:'absolute',alignItems: "center",marginTop: containerMarginTop, marginLeft: containerMarginLeft}}>
                 <Dial id={"dial-frequency"} boxWidth={boxWidth} boxHeight={boxHeight} checking={processingSolution} 
                   rotationAngle={frequency} setRotationAngle={setFrequency} isReseting={isReseting}
-                  xPosition={boxWidth*appSettings.dialsGap*1} name={appSettings.dialsNames[0]} maxSteps={frecuencyMaxSteps}/>                  
+                  xPosition={boxWidth*appSettings.dialsGap*1} name={appSettings.screenTextNames[0]} maxSteps={frecuencyMaxSteps}/>                  
                 <Dial id={"dial-amplitude"}  boxWidth={boxWidth} boxHeight={boxHeight} checking={processingSolution} 
                   rotationAngle={amplitude} setRotationAngle={setAmplitude} isReseting={isReseting}
-                  xPosition={boxWidth*appSettings.dialsGap*2} name={appSettings.dialsNames[1]} maxSteps={amplitudeMaxSteps}/> 
+                  xPosition={boxWidth*appSettings.dialsGap*2} name={appSettings.screenTextNames[1]} maxSteps={amplitudeMaxSteps}/> 
                 <Dial id={"dial-phase"}  boxWidth={boxWidth} boxHeight={boxHeight} checking={processingSolution} 
                   rotationAngle={phase} setRotationAngle={setPhase} isReseting={isReseting} 
-                  xPosition={boxWidth*appSettings.dialsGap*3 } name={appSettings.dialsNames[2]} maxSteps={phaseMaxSteps}/>             
+                  xPosition={boxWidth*appSettings.dialsGap*3 } name={appSettings.screenTextNames[2]} maxSteps={phaseMaxSteps}/>             
             </div>    
             <Ray boxHeight={boxHeight} boxWidth={boxWidth} checking={processingSolution} waveType={waveType} paused={paused} powerOn={light !== "nok"?true:false} animation={animation} setAnimation={setAnimation}
                   frequency={frequencyMapped} amplitude={light === "ok" ? audioAmplitude : amplitudeMapped} wavelength={phaseMapped}/>
@@ -305,7 +305,7 @@ const powerClick = () => {
               style={{ width: boxWidth * appSettings.multiButtonWidth , height: boxHeight *appSettings.multiButtonHeight, top: boxHeight * appSettings.multiButtonMarginTop, left: boxWidth * appSettings.multiButtonMarginLeft, 
               backgroundImage: 'url("' + appSettings.modeButton + '")', 
             }}><p className='multi-button' style={{ marginTop: "12vmin", textAlign: "bottom", fontSize:"1.5vmin", color:appSettings.multiTextColor}}>TYPE</p></div>}
-            {/* TEMPORAL PAUSA **/} 
+            
             <div className={"boxButton boxButton"} onClick={() => !processingSolution && powerClick()} 
               style={{ width: boxWidth * appSettings.multiButtonWidth , height: boxHeight *appSettings.multiButtonHeight, top: boxHeight * appSettings.multiButtonMarginTop*0.07, left: boxWidth * appSettings.multiButtonMarginLeft, 
               backgroundImage: 'url("' + appSettings.backgroundPowerButton + '")', 
@@ -331,10 +331,10 @@ const powerClick = () => {
         </div>}
 
        {light==="off" &&
-          <div className="data-show-container" style={{visibility: powerOn ? "visible" : "hidden", opacity: powerOn ? 1 : 0, marginTop: boxHeight * appSettings.dataContainerMarginTop,  height: boxHeight, width: boxWidth, gap: boxWidth*appSettings.textGap}}>
-                <p className='data-show'style={{fontSize: boxHeight * appSettings.screenTextSize, transform: "rotate(8deg)",maxWidth:"7vmin", minWidth: '7vmin'}}>{appSettings.dialsNames[0]}:{appSettings.viewAngle==="FALSE" ? angleToStep(frequency, frecuencyMaxSteps) : frequencyMapped.toFixed(3)}</p>              
-                <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize, marginTop: "6%",maxWidth:"7vmin", minWidth: '7vmin'}}>{appSettings.dialsNames[1]}:{appSettings.viewAngle==="FALSE" ? angleToStep(amplitude, amplitudeMaxSteps) : amplitudeMapped.toFixed(3)}</p>
-                <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize, transform: "rotate(-8deg)", maxWidth:"7vmin"}}>{appSettings.dialsNames[2]}:{appSettings.viewAngle==="FALSE" ? angleToStep(phase, phaseMaxSteps)*15 : phaseMapped.toFixed(0)}°</p>
+          <div className="data-show-container" style={{visibility: powerOn ? "visible" : "hidden", opacity: powerOn ? 1 : 0, marginTop: boxHeight * appSettings.dataContainerMarginTop, marginLeft:boxWidth * appSettings.dataContainerMarginLeft, height: boxHeight*0.4, width: boxWidth, gap: boxWidth*appSettings.textGap+'px'}}>
+                <p className='data-show'style={{fontSize: boxHeight * appSettings.screenTextSize+'px', transform: "rotate(11deg)", width: boxWidth*0.1, marginTop: "2.7%"}}>{appSettings.dialsNames[0]}:{appSettings.viewAngle==="FALSE" ? angleToStep(frequency, frecuencyMaxSteps)+1 : frequencyMapped.toFixed(3)}</p>              
+                <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize+'px', marginTop: "7.4%", width: boxWidth*0.1}}>{appSettings.dialsNames[1]}:{appSettings.viewAngle==="FALSE" ? angleToStep(amplitude, amplitudeMaxSteps)+1 : amplitudeMapped.toFixed(3)}</p>
+                <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize+'px' , transform: "rotate(-12deg)",  marginTop: "4.5%", width: boxWidth*0.12, left: "5%"}}>{appSettings.dialsNames[2]}:{appSettings.viewAngle==="FALSE" ? angleToStep(phase, phaseMaxSteps)*15 : phaseMapped.toFixed(0)}</p>
           </div>
       }
       <div className="screenContainer" style={{visibility: !powerOn ? "visible" : "hidden", opacity: !powerOn ? 1 : 0, backgroundImage: 'url('+appSettings.backgroundOff+')',  marginTop: boxHeight*appSettings.screenContainerMarginTop,

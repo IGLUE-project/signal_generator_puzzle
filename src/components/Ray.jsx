@@ -21,14 +21,15 @@ const Ray = (props) => {
         const maxFrequency = propsRef.current.frequency / 1;
         const phaseOffset = (propsRef.current.wavelength * Math.PI) / 180; // Conviert fase de grados a radianes
 
-        for (let x = 0; x < width; x++) {
+        for (let i = 0; i < width; i++) {
+            const x = width - 1 - i; // Invierto la direccion 
             const distanceFromCenter = Math.abs(x - centerX) / centerX;
             const scale = Math.sin((1 - distanceFromCenter) * Math.PI / 2);
 
             const scaledAmplitude = maxAmplitude * scale;
             const scaledWavelength = fixedWavelength * scale;
             const scaledFrequency = maxFrequency * scale;
-
+            //const phase = (2 * Math.PI * scaledFrequency * (x - offsetRef.current)) / scaledWavelength + phaseOffset;
             const phase = (2 * Math.PI * scaledFrequency * (x + offsetRef.current)) / scaledWavelength + phaseOffset;
 
             let waveValue = 0;
@@ -43,7 +44,7 @@ const Ray = (props) => {
             }
 
             const y = height / 2 + scaledAmplitude * waveValue;
-             ctx.lineTo(x, y);
+            ctx.lineTo(i, y); // 
         }
         ctx.stroke();
         ctx.closePath();
@@ -96,7 +97,7 @@ const Ray = (props) => {
         canvas.width = width; canvas.height = height;
         ctx.clearRect(0, 0, width, height);
         drawWave(ctx, width, height);
-        offsetRef.current += propsRef.current.paused ? 0 : 1;//1;
+        offsetRef.current += propsRef.current.paused ? 0 : 0.5;
         animationRef.current = requestAnimationFrame(draw);
     };
 
