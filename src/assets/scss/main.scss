@@ -104,6 +104,9 @@ p#rotationNum{
 	align-items: center; 
 	gap: 3vmin;
 	pointer-events: none; 
+	align-items: center;
+	justify-content: center;
+	transition: opacity 2.5s ease, visibility ease 2.5s;
 }
   
 .data-show {

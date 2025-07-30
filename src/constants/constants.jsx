@@ -8,7 +8,9 @@ export const DEFAULT_APP_SETTINGS = {
   modeButton: "images/standard/mode_button.png",
   backgroundNok: "images/standard/background_nok.png",
   backgroundOk: "images/standard/background_ok.png",
+  backgroundOff: "images/standard/background_off.png",
   backgroundButton: "images/standard/button.png",
+  backgroundPowerButton: "images/standard/power_button.png",
   backgroundMessage: "images/standard/background_message.png",
   imageLightOff: "images/standard/light_off.png",
   imageLightNok: "images/standard/light_nok.png",
@@ -18,6 +20,8 @@ export const DEFAULT_APP_SETTINGS = {
   soundOk: "sounds/solution_ok.mp3",
   soundDial: "sounds/spin.wav",
   soundAfterSolve: "sounds/after_solve.mp3", // Sound played after solving the puzzle
+  soundTurnOn: "sounds/turnon.wav", // Sound played when the power is turned on
+  soundTurnOff: "sounds/turnoff.wav", // Sound played when the power is turned off
   dialMode: "MULTI", // Dial mode can be "NORMAL" or "MULTI"
 
   //Developer settings
@@ -37,7 +41,7 @@ export const DEFAULT_APP_SETTINGS = {
 
   minFrequency: 0.1, // Minimum frequency for the ray
   maxFrequency: 0.5, // Maximum frequency for the ray
-  minAmplitude: 0, // Minimum amplitude for the ray
+  minAmplitude: 1, // Minimum amplitude for the ray
   maxAmplitude: 50, // Maximum amplitude for the ray
   minWavelength: 10, // Minimum wavelength for the ray
   maxWavelength: 80, // Maximum wavelength for the ray

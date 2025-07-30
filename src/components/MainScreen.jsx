@@ -23,6 +23,8 @@ const MainScreen = (props) => {
   const [amplitude, setAmplitude] = useState(0);
 
   const [paused, setPaused] = useState(false);
+  const [powerOn, setPowerOn] = useState(false);
+  const [animation, setAnimation] = useState('');
  
 
   const mapRange = (value, min1, max1, min2, max2) => {
@@ -105,23 +107,26 @@ const MainScreen = (props) => {
   }
 
   const checkSolution = () => {
-    if (processingSolution) {
+    if (processingSolution || !powerOn)  {
       return;
     }
 
     let audio = document.getElementById("audio_beep");
+    audio.onended = null;
     audio.currentTime = 0; 
     audio.play();
 
+    
+
     setProcessingSolution(true);
-    Utils.log("Check solution", [ angleToStep(frequency, frecuencyMaxSteps), angleToStep(amplitude, amplitudeMaxSteps), angleToStep(phase, phaseMaxSteps)]);
+    Utils.log("Check solution", [ angleToStep(frequency, frecuencyMaxSteps), angleToStep(amplitude, amplitudeMaxSteps), angleToStep(phase, phaseMaxSteps)*15]);
     let solution = "";
     if(appSettings.viewAngle === "FALSE"){ //Esto no se si quitarlo
-      solution = [waveType, angleToStep(frequency, frecuencyMaxSteps), angleToStep(amplitude, amplitudeMaxSteps), angleToStep(phase, phaseMaxSteps)].join(';');
+      solution = [waveType, angleToStep(frequency, frecuencyMaxSteps), angleToStep(amplitude, amplitudeMaxSteps), angleToStep(phase, phaseMaxSteps)*15].join(';');
     }else{
       solution = [waveType, frequencyMapped.toFixed(3), amplitudeMapped.toFixed(3), phaseMapped.toFixed(0)].join(';');
     }
-    console.log("Check solution", solution);
+    //console.log("Check solution", solution);
     escapp.checkNextPuzzle(solution, {}, (success, erState) => {
           Utils.log("Check solution Escapp response", success, erState);
           try {
@@ -155,7 +160,6 @@ const MainScreen = (props) => {
       }else{
         
         if(appSettings.actionAfterSolve === "PLAY_SOUND"){
-          //playFrequency(frequencyMapped); // Reproduce el sonido de la frecuencia
           audio = document.getElementById("audio_post_success");          
           audio.play();
           visualizeAudio(audio);
@@ -230,22 +234,43 @@ const MainScreen = (props) => {
   };
 
 const changeWaveType = () => {
+  
   let audio = document.getElementById("audio_beep");
   audio.currentTime = 0; 
   audio.play();
+  if(!powerOn)return;
   const waveTypes = ["sine", "square", "triangle", "sawtooth"];
   const currentIndex = waveTypes.indexOf(waveType);
   const nextIndex = (currentIndex + 1) % waveTypes.length;
   setWaveType(waveTypes[nextIndex]);
   Utils.log("Wave type changed to", waveTypes[nextIndex]);
-  //pauseRay(); // Pausa la animación al cambiar el tipo de onda
 }
 
-const pauseRay = () => {
-    let audio = document.getElementById("audio_beep");
-  audio.currentTime = 0; 
-  audio.play();
-  paused ? setPaused(false) : setPaused(true);
+const powerClick = () => {
+  if(processingSolution) return; 
+  let audiobeep = document.getElementById("audio_beep");
+  let audioTurn;
+  
+  audiobeep.currentTime = 0; 
+  audiobeep.play();
+  
+  //paused ? setPaused(false) : setPaused(true);
+  if(powerOn) {
+    audioTurn = document.getElementById("audio_turn_off");
+    setPowerOn(false); setAnimation('disappear');
+    audiobeep.onended = () => {
+      audioTurn.currentTime = 0;
+      audioTurn.play();
+    };
+  }else{
+    audioTurn = document.getElementById("audio_turn_on");
+    setPowerOn(true); setAnimation('appear');
+    audiobeep.onended = () => {
+      audioTurn.currentTime = 0;
+      audioTurn.play();
+    };
+  }
+
 }
 
   return (
@@ -262,8 +287,8 @@ const pauseRay = () => {
                   rotationAngle={phase} setRotationAngle={setPhase} isReseting={isReseting} 
                   xPosition={boxWidth*appSettings.dialsGap*3 } name={appSettings.dialsNames[2]} maxSteps={phaseMaxSteps}/>             
             </div>    
-            {light!=="nok" && <Ray boxHeight={boxHeight} boxWidth={boxWidth} checking={processingSolution} waveType={waveType} paused={paused}
-                  frequency={frequencyMapped} amplitude={light === "ok" ? audioAmplitude : amplitudeMapped} wavelength={phaseMapped}/>}
+            <Ray boxHeight={boxHeight} boxWidth={boxWidth} checking={processingSolution} waveType={waveType} paused={paused} powerOn={light !== "nok"?true:false} animation={animation} setAnimation={setAnimation}
+                  frequency={frequencyMapped} amplitude={light === "ok" ? audioAmplitude : amplitudeMapped} wavelength={phaseMapped}/>
             <div className="boxLight boxLight_off" style={{ visibility: light === "off" ? "visible" : "hidden", opacity: light === "off" ? "1" : "0", width: lightWidth, height: lightHeight, backgroundImage: 'url("' + appSettings.imageLightOff + '")', left: lightLeft, top: lightTop }} ></div> 
             <div className="boxLight boxLight_nok" style={{ visibility: light === "nok" ? "visible" : "hidden", opacity: light === "nok" ? "1" : "0", width: lightWidth, height: lightHeight, backgroundImage: 'url("' + appSettings.imageLightNok + '")', left: lightLeft, top: lightTop }} ></div> 
             <div className="boxLight boxLight_ok" style={{ visibility: light === "ok" ? "visible" : "hidden", opacity: light === "ok" ? "1" : "0", width: lightWidth, height: lightHeight, backgroundImage: 'url("' + appSettings.imageLightOk + '")', left: lightLeft, top: lightTop }} ></div>
@@ -278,10 +303,10 @@ const pauseRay = () => {
               backgroundImage: 'url("' + appSettings.modeButton + '")', 
             }}><p className='multi-button' style={{ marginTop: "12vmin", textAlign: "bottom", fontSize:"1.5vmin", color:appSettings.multiTextColor}}>TYPE</p></div>}
             {/* TEMPORAL PAUSA **/} 
-            <div className={"boxButton boxButton"} onClick={() => !processingSolution && pauseRay()} 
-              style={{ width: boxWidth * appSettings.multiButtonWidth , height: boxHeight *appSettings.multiButtonHeight, top: boxHeight * appSettings.multiButtonMarginTop*0.05, left: boxWidth * appSettings.multiButtonMarginLeft, 
-              backgroundImage: 'url("' + appSettings.modeButton + '")', 
-            }}><p className='multi-button' style={{ marginTop: "12vmin", textAlign: "bottom", fontSize:"3vmin", color:appSettings.multiTextColor}}>▶︎</p></div>
+            <div className={"boxButton boxButton"} onClick={() => !processingSolution && powerClick()} 
+              style={{ width: boxWidth * appSettings.multiButtonWidth , height: boxHeight *appSettings.multiButtonHeight, top: boxHeight * appSettings.multiButtonMarginTop*0.07, left: boxWidth * appSettings.multiButtonMarginLeft, 
+              backgroundImage: 'url("' + appSettings.backgroundPowerButton + '")', 
+            }}><svg xmlns="http://www.w3.org/2000/svg" style={{marginLeft:"-0.2vmin"}} height={boxHeight*0.07} viewBox="0 -960 960 960" width={boxWidth*0.07} fill="#e6e5e5ff"><path d="M480-480q-17 0-28.5-11.5T440-520v-320q0-17 11.5-28.5T480-880q17 0 28.5 11.5T520-840v320q0 17-11.5 28.5T480-480Zm0 360q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-480q0-61 20-118.5T198-704q11-14 28-13.5t30 13.5q11 11 10 27t-11 30q-27 36-41 79t-14 88q0 117 81.5 198.5T480-200q117 0 198.5-81.5T760-480q0-46-13.5-89.5T704-649q-10-13-11-28.5t10-26.5q12-12 29-12.5t28 12.5q39 48 59.5 105T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Z"/></svg></div>
 
         </div>
         {light==="nok" && <div className="screenContainer" style={{backgroundImage: 'url('+appSettings.backgroundNok+')',  marginTop: boxHeight*appSettings.screenContainerMarginTop,
@@ -302,15 +327,22 @@ const pauseRay = () => {
               </svg>
         </div>}
 
-       {light==="off" && <div className="data-show-container" style={{marginTop: boxHeight * appSettings.dataContainerMarginTop, alignItems:"center", justifyContent: "center", height: boxHeight, width: boxWidth, gap: boxWidth*appSettings.textGap}}>
-              <p className='data-show'style={{fontSize: boxHeight * appSettings.screenTextSize, transform: "rotate(8deg)",maxWidth:"7vmin", minWidth: '7vmin'}}>{appSettings.dialsNames[0]}:{appSettings.viewAngle==="FALSE" ? angleToStep(frequency, frecuencyMaxSteps) : frequencyMapped.toFixed(3)}</p>              
-              <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize, marginTop: "6%",maxWidth:"7vmin", minWidth: '7vmin'}}>{appSettings.dialsNames[1]}:{appSettings.viewAngle==="FALSE" ? angleToStep(amplitude, amplitudeMaxSteps) : amplitudeMapped.toFixed(3)}</p>
-              <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize, transform: "rotate(-8deg)", maxWidth:"7vmin"}}>{appSettings.dialsNames[2]}:{appSettings.viewAngle==="FALSE" ? angleToStep(phase, phaseMaxSteps)*15 : phaseMapped.toFixed(0)}°</p>
-        </div>}
+       {light==="off" &&
+          <div className="data-show-container" style={{visibility: powerOn ? "visible" : "hidden", opacity: powerOn ? 1 : 0, marginTop: boxHeight * appSettings.dataContainerMarginTop,  height: boxHeight, width: boxWidth, gap: boxWidth*appSettings.textGap}}>
+                <p className='data-show'style={{fontSize: boxHeight * appSettings.screenTextSize, transform: "rotate(8deg)",maxWidth:"7vmin", minWidth: '7vmin'}}>{appSettings.dialsNames[0]}:{appSettings.viewAngle==="FALSE" ? angleToStep(frequency, frecuencyMaxSteps) : frequencyMapped.toFixed(3)}</p>              
+                <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize, marginTop: "6%",maxWidth:"7vmin", minWidth: '7vmin'}}>{appSettings.dialsNames[1]}:{appSettings.viewAngle==="FALSE" ? angleToStep(amplitude, amplitudeMaxSteps) : amplitudeMapped.toFixed(3)}</p>
+                <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize, transform: "rotate(-8deg)", maxWidth:"7vmin"}}>{appSettings.dialsNames[2]}:{appSettings.viewAngle==="FALSE" ? angleToStep(phase, phaseMaxSteps)*15 : phaseMapped.toFixed(0)}°</p>
+          </div>
+      }
+      <div className="screenContainer" style={{visibility: !powerOn ? "visible" : "hidden", opacity: !powerOn ? 1 : 0, backgroundImage: 'url('+appSettings.backgroundOff+')',  marginTop: boxHeight*appSettings.screenContainerMarginTop,
+            width: containerWidth*appSettings.screenContainerWidth, height: containerHeight*appSettings.screenContainerHeight, transition: "opacity 2.5s ease, visibility ease 2.5s"}}/>
+
 
       <audio id="audio_beep" src={appSettings.soundBeep} autostart="false" preload="auto" />
       <audio id="audio_failure" src={appSettings.soundNok} autostart="false" preload="auto" />
       <audio id="audio_success" src={appSettings.soundOk} autostart="false" preload="auto" />
+      <audio id="audio_turn_on" src={appSettings.soundTurnOn} autostart="false" preload="auto" />
+      <audio id="audio_turn_off" src={appSettings.soundTurnOff} autostart="false" preload="auto" />
       {appSettings.actionAfterSolve === "PLAY_SOUND" && <audio id="audio_post_success" src={I18n.getTrans("i.sound")} autostart="false" preload="auto" />}
 
  
