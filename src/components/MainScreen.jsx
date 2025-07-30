@@ -251,11 +251,13 @@ const powerClick = () => {
   let audiobeep = document.getElementById("audio_beep");
   let audioTurn;
   
+  
   audiobeep.currentTime = 0; 
   audiobeep.play();
   
   //paused ? setPaused(false) : setPaused(true);
   if(powerOn) {
+    reset();
     audioTurn = document.getElementById("audio_turn_off");
     setPowerOn(false); setAnimation('disappear');
     audiobeep.onended = () => {
