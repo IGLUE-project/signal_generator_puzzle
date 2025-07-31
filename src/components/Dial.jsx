@@ -11,6 +11,8 @@ const  Dial = ( props ) => {
     const [initialRotation, setInitialRotation] = useState(0); // Ángulo inicial del lock
     const [isMouseDown, setIsMouseDown] = useState(false); // Estado para saber si el mouse está presionado
     const [startAngle, setStartAngle] = useState(0); // Ángulo inicial del ratón
+    const [lastMoveTime, setLastMoveTime] = useState(0); // Tiempo del último movimiento
+    const [pendingDirection, setPendingDirection] = useState(null); // Dirección pendiente de movimiento
    // const [rotationDirection, setRotationDirection] = useState(false); // Dirección de rotación (horario o antihorario)
 
     const handleMouseMove = (event) => {
@@ -27,22 +29,41 @@ const  Dial = ( props ) => {
         const rotationDir = getRotationDirection(currentStep, newStep);
 
         if(currentStep >= maxSteps){
-            props.setRotationAngle(0); // Si el paso actual es mayor que el máximo, reinicia a 0
-            //console.warn("Current step exceeds max steps, resetting to 0");
+            props.setRotationAngle(maxSteps-1); // Si el paso actual es mayor que el máximo, reinicia a 0
+            console.warn("Current step exceeds max steps, resetting to ", maxSteps - 1);
             return;
         }
         
         if(props.rotationAngle === newRotation) return; // No actualiza si el ángulo no ha cambiado
         if(currentStep === (maxSteps - 1) && rotationDir) return; // En el paso máximo y girando hacia adelante
         if(currentStep === 0 && !rotationDir) return; // En el paso 0 y girando hacia atrás
-
-        props.setRotationAngle(newRotation);     
+        
+        const currentTime = Date.now();
+        const timeSinceLastMove = currentTime - lastMoveTime;        
+        if (timeSinceLastMove < appSettings.dialSpeed) {
+            if (rotationDir !== null) {
+                setPendingDirection(rotationDir);
+            }
+            return;
+        }
+        const directionToUse = pendingDirection !== null ? pendingDirection : rotationDir;        
+        if (directionToUse === null) return;
+        const nextStep = directionToUse ? currentStep + 1 : currentStep - 1;        
+        if (nextStep < 0 || nextStep >= maxSteps) {
+            setPendingDirection(null);
+            return;
+        }
+        const nextRotation = nextStep * degreesPerStep;
+        props.setRotationAngle(nextRotation);
         audio.play();
+        setLastMoveTime(currentTime);
+        setPendingDirection(null); // Limpiar dirección pendiente
     };
 
     const handleMouseUp = () => {
         if (props.checking || props.isReseting) return ;
-        setIsMouseDown(false); 
+        setIsMouseDown(false);
+        setPendingDirection(null); // Limpiar dirección pendiente al soltar el mouse
     };
 
     const handleMouseDown = (event) => {
@@ -80,6 +101,8 @@ const  Dial = ( props ) => {
 
     const reset = () => {
         setStartAngle(0);
+        setLastMoveTime(0);
+        setPendingDirection(null);
         //setRotationDirection("");
     }
 

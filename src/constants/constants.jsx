@@ -47,6 +47,7 @@ export const DEFAULT_APP_SETTINGS = {
   svgSize: '25vmin',
   viewAngle: "FALSE", //FALSE, TRUE
   textGap: 0.085,
+  dialSpeed: 40, // Speed of the dial rotation in milliseconds
   screenContainerWidth: 0.543, // Width of the screen container
   screenContainerHeight: 0.543, // Height of the screen container
   screenContainerMarginTop: -0.256, // Margin from the top of the box to the screen container in percentage of box height
