@@ -15,6 +15,7 @@ const  Dial = ( props ) => {
 
     const handleMouseMove = (event) => {
         if (!isMouseDown || props.checking || props.isReseting) return ;   
+        
         let audio  = document.getElementById("audio_wheel");
         let rounded = calculateAngle(event); 
         const angleDifference = normalizeAngleDifference(rounded - startAngle);
@@ -24,6 +25,12 @@ const  Dial = ( props ) => {
         const newStep = Math.round(newRotation / degreesPerStep);
 
         const rotationDir = getRotationDirection(currentStep, newStep);
+
+        if(currentStep >= maxSteps){
+            props.setRotationAngle(0); // Si el paso actual es mayor que el máximo, reinicia a 0
+            //console.warn("Current step exceeds max steps, resetting to 0");
+            return;
+        }
         
         if(props.rotationAngle === newRotation) return; // No actualiza si el ángulo no ha cambiado
         if(currentStep === (maxSteps - 1) && rotationDir) return; // En el paso máximo y girando hacia adelante
