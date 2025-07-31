@@ -34,7 +34,7 @@ const MainScreen = (props) => {
   //Maximo de cada dial
   const frecuencyMaxSteps = 50; 
   const phaseMaxSteps = 24; // Fase de 0 a 360 grados
-  const amplitudeMaxSteps = 26; 
+  const amplitudeMaxSteps = 25; 
  
   const angleToStep = (angle, maxSteps) => {
     return Math.round(angle / (360/maxSteps));
