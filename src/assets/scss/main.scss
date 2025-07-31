@@ -96,6 +96,7 @@ p#rotationNum{
 	font-family: "Fira Sans", sans-serif;
 	font-size : 4vmin; 
 	font-weight: 800;
+	user-select: none;
 }
 
 .data-show-container {
@@ -132,4 +133,5 @@ p#rotationNum{
 	margin-top: 12vmin;
 	text-align: bottom;
 	font-size:1.5vmin;
+	user-select: none;
 }

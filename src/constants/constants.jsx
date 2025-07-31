@@ -19,10 +19,9 @@ export const DEFAULT_APP_SETTINGS = {
   soundNok: "sounds/solution_nok.mp3",
   soundOk: "sounds/solution_ok.mp3",
   soundDial: "sounds/spin.wav",
-  soundAfterSolve: "sounds/after_solve.mp3", // Sound played after solving the puzzle
   soundTurnOn: "sounds/turnon.wav", // Sound played when the power is turned on
   soundTurnOff: "sounds/turnoff.wav", // Sound played when the power is turned off
-  dialMode: "MULTI", // Dial mode can be "NORMAL" or "MULTI"
+  waveformButton: true,
 
   //Developer settings
   dialWidth: 0.7, 

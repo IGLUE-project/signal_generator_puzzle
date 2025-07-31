@@ -301,10 +301,10 @@ const powerClick = () => {
               backgroundImage: 'url("' + appSettings.backgroundButton + '")',
             }}/>
 
-            {appSettings.dialMode==="MULTI" && <div className={"boxButton boxButton"} onClick={() => !processingSolution && changeWaveType()} 
+            {appSettings.waveformButton && <div className={"boxButton boxButton"} onClick={() => !processingSolution && changeWaveType()} 
               style={{ width: boxWidth * appSettings.multiButtonWidth , height: boxHeight *appSettings.multiButtonHeight, top: boxHeight * appSettings.multiButtonMarginTop, left: boxWidth * appSettings.multiButtonMarginLeft, 
               backgroundImage: 'url("' + appSettings.modeButton + '")', 
-            }}><p className='multi-button' style={{ marginTop: "12vmin", textAlign: "bottom", fontSize:"1.5vmin", color:appSettings.multiTextColor}}>TYPE</p></div>}
+            }}><p className='multi-button' style={{ marginTop: "12vmin", textAlign: "bottom", fontSize:"1.5vmin", color:appSettings.multiTextColor}}>{I18n.getTrans("i.type")}</p></div>}
             
             <div className={"boxButton boxButton"} onClick={() => !processingSolution && powerClick()} 
               style={{ width: boxWidth * appSettings.multiButtonWidth , height: boxHeight *appSettings.multiButtonHeight, top: boxHeight * appSettings.multiButtonMarginTop*0.07, left: boxWidth * appSettings.powerButtonMarginLeft, 
@@ -340,15 +340,13 @@ const powerClick = () => {
       <div className="screenContainer" style={{visibility: !powerOn ? "visible" : "hidden", opacity: !powerOn ? 1 : 0, backgroundImage: 'url('+appSettings.backgroundOff+')',  marginTop: boxHeight*appSettings.screenContainerMarginTop,
             width: containerWidth*appSettings.screenContainerWidth, height: containerHeight*appSettings.screenContainerHeight, transition: "opacity 2.5s ease, visibility ease 2.5s"}}/>
 
+      <audio id="audio_beep" src={appSettings.soundBeep} preload="auto" />
+      <audio id="audio_failure" src={appSettings.soundNok} preload="auto" />
+      <audio id="audio_success" src={appSettings.soundOk} preload="auto" />
+      <audio id="audio_turn_on" src={appSettings.soundTurnOn} preload="auto" />
+      <audio id="audio_turn_off" src={appSettings.soundTurnOff} preload="auto" />
+      {appSettings.actionAfterSolve === "PLAY_SOUND" && <audio id="audio_post_success" src={appSettings.soundAfterSolve} preload="auto" />}
 
-      <audio id="audio_beep" src={appSettings.soundBeep} autostart="false" preload="auto" />
-      <audio id="audio_failure" src={appSettings.soundNok} autostart="false" preload="auto" />
-      <audio id="audio_success" src={appSettings.soundOk} autostart="false" preload="auto" />
-      <audio id="audio_turn_on" src={appSettings.soundTurnOn} autostart="false" preload="auto" />
-      <audio id="audio_turn_off" src={appSettings.soundTurnOff} autostart="false" preload="auto" />
-      {appSettings.actionAfterSolve === "PLAY_SOUND" && <audio id="audio_post_success" src={I18n.getTrans("i.sound")} autostart="false" preload="auto" />}
-
- 
     </div>);
 };
 

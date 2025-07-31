@@ -1,17 +1,20 @@
 export let LOCALES = {
   en:{
-    "i.message": "Correct frequency tuned! \n Click 'Continue' to advance to the next puzzle.",
     "i.continue":"Continue",
-    "i.sound": "sounds/afterSolve/after_solve_en.mp3"
+    "i.message": "You've produced the correct wave! \n Click 'Continue' to advance to the next puzzle.",
+    "i.sound_after_solve": "sounds/after_solve_en.mp3",
+    "i.type": "TYPE"
   },
   es:{
-    "i.message": "¡Has sintonizado la frecuencia correcta! \n Pulsa 'Continuar' para avanzar al siguiente reto.",
     "i.continue":"Continuar",
-    "i.sound": "sounds/afterSolve/after_solve_es.mp3"
+    "i.message": "¡Has generado la onda correcta! \n Pulsa 'Continuar' para avanzar al siguiente reto.",
+    "i.sound_after_solve": "sounds/after_solve_es.mp3",
+    "i.type": "TIPO"
   },
   sr:{
-    "i.message": "Correct frequency tuned! \n Click 'Continue' to advance to the next puzzle.",
     "i.continue":"Continue",
-    "i.sound": "sounds/afterSolve/after_solve_en.mp3"
+    "i.message": "You've produced the correct wave! \n Click 'Continue' to advance to the next puzzle.",
+    "i.sound_after_solve": "sounds/after_solve_en.mp3",
+    "i.type": "TYPE"
   },
 };

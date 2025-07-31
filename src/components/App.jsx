@@ -51,12 +51,7 @@ export default function App() {
 
     let skinSettings;
     switch(_appSettings.skin){
-      case "RETRO":
-        skinSettings = SKIN_SETTINGS_RETRO;
-        break;
-      case "FUTURISTIC":
-        skinSettings = SKIN_SETTINGS_FUTURISTIC;
-        break;
+      case "STANDARD":
       default:
         skinSettings = {};
     }
@@ -65,31 +60,9 @@ export default function App() {
      // Merge _appSettings with DEFAULT_APP_SETTINGS_SKIN to obtain final app settings
     _appSettings = Utils.deepMerge(DEFAULT_APP_SETTINGS_SKIN, _appSettings);
     
-    const allowedActions = ["NONE", "SHOW_MESSAGE"];
+    const allowedActions = ["NONE", "SHOW_MESSAGE", "PLAY_SOUND"];
     if(!allowedActions.includes(_appSettings.actionAfterSolve)) {
       _appSettings.actionAfterSolve = DEFAULT_APP_SETTINGS.actionAfterSolve;
-    }
-
-    switch(_appSettings.keysType){
-      case "LETTERS":
-        _appSettings.keys = _appSettings.letters;
-        _appSettings.backgroundKeys = new Array(12).fill(_appSettings.backgroundKey);
-        break;
-      case "COLORS":
-        _appSettings.keys = _appSettings.colors;
-        _appSettings.backgroundKeys = _appSettings.coloredBackgroundKeys;
-        break;
-      case "SYMBOLS":
-        _appSettings.keys = _appSettings.symbols;
-        if((_appSettings.skin === "FUTURISTIC")&&(_appSettings.backgroundKey === "images/background_key_futuristic.png")){
-          _appSettings.backgroundKey = "images/background_key_futuristic_black.png";
-        }
-        _appSettings.backgroundKeys = new Array(12).fill(_appSettings.backgroundKey);
-        break;
-      default:
-        //NUMBERS
-        _appSettings.keys = _appSettings.numbers;
-        _appSettings.backgroundKeys = new Array(12).fill(_appSettings.backgroundKey);
     }
 
     //Init internacionalization module
@@ -97,6 +70,10 @@ export default function App() {
 
     if(typeof _appSettings.message !== "string"){
       _appSettings.message = I18n.getTrans("i.message");
+    }
+
+    if(typeof _appSettings.soundAfterSolve !== "string"){
+      _appSettings.soundAfterSolve = I18n.getTrans("i.sound_after_solve");
     }
 
     //Change HTTP protocol to HTTPs in URLs if necessary
