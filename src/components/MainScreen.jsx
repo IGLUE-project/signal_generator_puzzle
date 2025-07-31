@@ -34,7 +34,7 @@ const MainScreen = (props) => {
   //Maximo de cada dial
   const frecuencyMaxSteps = 50; 
   const phaseMaxSteps = 24; // Fase de 0 a 360 grados
-  const amplitudeMaxSteps = 25; 
+  const amplitudeMaxSteps = 26; 
  
   const angleToStep = (angle, maxSteps) => {
     return Math.round(angle / (360/maxSteps));
@@ -119,7 +119,7 @@ const MainScreen = (props) => {
     
 
     setProcessingSolution(true);
-    Utils.log("Check solution", [ angleToStep(frequency, frecuencyMaxSteps)+1, angleToStep(amplitude, amplitudeMaxSteps)+1, angleToStep(phase, phaseMaxSteps)*15]);
+    Utils.log("Check solution", [ angleToStep(frequency, frecuencyMaxSteps)+1, angleToStep(amplitude, amplitudeMaxSteps), angleToStep(phase, phaseMaxSteps)*15]);
     let solution = "";
     if(appSettings.viewAngle === "FALSE"){ //Esto no se si quitarlo
       solution = [waveType, angleToStep(frequency, frecuencyMaxSteps), angleToStep(amplitude, amplitudeMaxSteps), angleToStep(phase, phaseMaxSteps)*15].join(';');
@@ -331,10 +331,10 @@ const powerClick = () => {
         </div>}
 
        {light==="off" &&
-          <div className="data-show-container" style={{visibility: powerOn ? "visible" : "hidden", opacity: powerOn ? 1 : 0, marginTop: boxHeight * appSettings.dataContainerMarginTop, marginLeft:boxWidth * appSettings.dataContainerMarginLeft, height: boxHeight*0.4, width: boxWidth, gap: boxWidth*appSettings.textGap+'px'}}>
-                <p className='data-show'style={{fontSize: boxHeight * appSettings.screenTextSize+'px', transform: "rotate(11deg)", width: boxWidth*0.1, marginTop: "2.7%"}}>{appSettings.dialsNames[0]}:{appSettings.viewAngle==="FALSE" ? angleToStep(frequency, frecuencyMaxSteps)+1 : frequencyMapped.toFixed(3)}</p>              
-                <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize+'px', marginTop: "7.4%", width: boxWidth*0.1}}>{appSettings.dialsNames[1]}:{appSettings.viewAngle==="FALSE" ? angleToStep(amplitude, amplitudeMaxSteps)+1 : amplitudeMapped.toFixed(3)}</p>
-                <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize+'px' , transform: "rotate(-12deg)",  marginTop: "4.5%", width: boxWidth*0.12, left: "5%"}}>{appSettings.dialsNames[2]}:{appSettings.viewAngle==="FALSE" ? angleToStep(phase, phaseMaxSteps)*15 : phaseMapped.toFixed(0)}</p>
+          <div className="data-show-container" style={{visibility: powerOn ? "visible" : "hidden", opacity: powerOn ? 1 : 0, marginTop: boxHeight * appSettings.dataContainerMarginTop, marginLeft:boxWidth * appSettings.dataContainerMarginLeft, height: boxHeight*0.4, width: boxWidth, }}>
+                <p className='data-show'style={{fontSize: boxHeight * appSettings.screenTextSize+'px', transform: "rotate(11deg)", width: boxWidth*0.1, marginTop: "3.1%", position:"absolute", marginLeft:"-35%"}}>{appSettings.dialsNames[0]}:{appSettings.viewAngle==="FALSE" ? angleToStep(frequency, frecuencyMaxSteps)+1 : frequencyMapped.toFixed(3)}</p>              
+                <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize+'px', marginTop: "6.8%", width: boxWidth*0.1,  marginLeft:"3.6%", position:"absolute"}}>{appSettings.dialsNames[1]}:{appSettings.viewAngle==="FALSE" ? angleToStep(amplitude, amplitudeMaxSteps) : amplitudeMapped.toFixed(3)}</p>
+                <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize+'px' , transform: "rotate(-10deg)",  marginTop: "3.3%", width: boxWidth*0.15, position:"absolute", marginLeft:"41%"}}>{appSettings.dialsNames[2]}:{appSettings.viewAngle==="FALSE" ? angleToStep(phase, phaseMaxSteps)*15 : phaseMapped.toFixed(0)}</p>
           </div>
       }
       <div className="screenContainer" style={{visibility: !powerOn ? "visible" : "hidden", opacity: !powerOn ? 1 : 0, backgroundImage: 'url('+appSettings.backgroundOff+')',  marginTop: boxHeight*appSettings.screenContainerMarginTop,
