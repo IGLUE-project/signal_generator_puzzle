@@ -122,7 +122,7 @@ const MainScreen = (props) => {
     Utils.log("Check solution", [ angleToStep(frequency, frecuencyMaxSteps)+1, angleToStep(amplitude, amplitudeMaxSteps), angleToStep(phase, phaseMaxSteps)*15]);
     let solution = "";
     if(appSettings.viewAngle === "FALSE"){ //Esto no se si quitarlo
-      solution = [waveType, angleToStep(frequency, frecuencyMaxSteps), angleToStep(amplitude, amplitudeMaxSteps), angleToStep(phase, phaseMaxSteps)*15].join(';');
+      solution = [waveType, angleToStep(frequency, frecuencyMaxSteps)+1, angleToStep(amplitude, amplitudeMaxSteps), angleToStep(phase, phaseMaxSteps)*15].join(';');
     }else{
       solution = [waveType, frequencyMapped.toFixed(3), amplitudeMapped.toFixed(3), phaseMapped.toFixed(0)].join(';');
     }
@@ -307,7 +307,7 @@ const powerClick = () => {
             }}><p className='multi-button' style={{ marginTop: "12vmin", textAlign: "bottom", fontSize:"1.5vmin", color:appSettings.multiTextColor}}>TYPE</p></div>}
             
             <div className={"boxButton boxButton"} onClick={() => !processingSolution && powerClick()} 
-              style={{ width: boxWidth * appSettings.multiButtonWidth , height: boxHeight *appSettings.multiButtonHeight, top: boxHeight * appSettings.multiButtonMarginTop*0.07, left: boxWidth * appSettings.multiButtonMarginLeft, 
+              style={{ width: boxWidth * appSettings.multiButtonWidth , height: boxHeight *appSettings.multiButtonHeight, top: boxHeight * appSettings.multiButtonMarginTop*0.07, left: boxWidth * appSettings.powerButtonMarginLeft, 
               backgroundImage: 'url("' + appSettings.backgroundPowerButton + '")', 
             }}><svg xmlns="http://www.w3.org/2000/svg" style={{marginLeft:"-0.2vmin"}} height={boxHeight*0.07} viewBox="0 -960 960 960" width={boxWidth*0.07} fill="#e6e5e5ff"><path d="M480-480q-17 0-28.5-11.5T440-520v-320q0-17 11.5-28.5T480-880q17 0 28.5 11.5T520-840v320q0 17-11.5 28.5T480-480Zm0 360q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-480q0-61 20-118.5T198-704q11-14 28-13.5t30 13.5q11 11 10 27t-11 30q-27 36-41 79t-14 88q0 117 81.5 198.5T480-200q117 0 198.5-81.5T760-480q0-46-13.5-89.5T704-649q-10-13-11-28.5t10-26.5q12-12 29-12.5t28 12.5q39 48 59.5 105T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Z"/></svg></div>
 

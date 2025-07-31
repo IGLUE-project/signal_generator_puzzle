@@ -53,8 +53,9 @@ export const DEFAULT_APP_SETTINGS = {
   screenContainerMarginTop: -0.256, // Margin from the top of the box to the screen container in percentage of box height
   multiButtonWidth: 0.1, // Relative width of the multi button compared to the box width
   multiButtonHeight: 0.1, // Relative height of the multi button compared to the box height
-  multiButtonMarginTop: 0.75, // Margin from the top of the box to the multi button in percentage of box height
-  multiButtonMarginLeft: 0.16, // Margin from the left of the box to the multi button in percentage of box width
+  multiButtonMarginTop: 0.74, // Margin from the top of the box to the multi button in percentage of box height
+  powerButtonMarginLeft: 0.16, // Margin from the left of the box to the power button in percentage of box width
+  multiButtonMarginLeft: 0.14, // Margin from the left of the box to the multi button in percentage of box width
   dataContainerMarginTop: 0.235,
   dataContainerMarginLeft: -0.04, // Margin from the left of the box to the data container in percentage of box width
   multiTextColor: "rgba(161, 106, 58, 1)",
