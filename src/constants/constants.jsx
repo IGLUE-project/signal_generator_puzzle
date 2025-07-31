@@ -3,7 +3,7 @@ export const DEFAULT_APP_SETTINGS = {
   actionAfterSolve: "NONE",
   message: undefined,
   background: "images/standard/background.png",
-  backgroundOscilloscope : "images/standard/background_oscilloscope.png",
+  backgroundDevice: "images/standard/background_device.png",
   backgroundDial: "images/standard/dial.png",
   modeButton: "images/standard/mode_button.png",
   backgroundNok: "images/standard/background_nok.png",
@@ -41,9 +41,9 @@ export const DEFAULT_APP_SETTINGS = {
   screenTextNames: ["F", "A", "ɸ"], // Names for the screen text
 
   minFrequency: 0.05, // Minimum frequency for the ray
-  maxFrequency: 0.3, // Maximum frequency for the ray
-  minAmplitude: 1, // Minimum amplitude for the ray
-  maxAmplitude: 65, // Maximum amplitude for the ray
+  maxFrequency: 0.25, // Maximum frequency for the ray
+  minAmplitude: 0, // Minimum amplitude for the ray
+  maxAmplitude: 73, // Maximum amplitude for the ray
 
   svgSize: '25vmin',
   viewAngle: "FALSE", //FALSE, TRUE

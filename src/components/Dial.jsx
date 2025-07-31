@@ -102,7 +102,7 @@ const  Dial = ( props ) => {
               transform: `rotate(${props.rotationAngle}deg)`, 
               transition: props.isReseting ? "transform 2.5s ease" : "none", // Transición suavedurante el reset
             }}>
-              <p id="rotationNum" className='rotationNum' onDragStart={(event) => event.preventDefault()} style={{fontSize: props.boxHeight * appSettings.dialTextSize}}>{props.name}</p></div>
+              <p id="rotationNum" className='rotationNum' onDragStart={(event) => event.preventDefault()} style={{fontSize: props.boxHeight * appSettings.dialTextSize * (props.id === "dial-phase" ? 0.9 : 1)}}>{props.name}</p></div>
               <audio id="audio_wheel" src="sounds/spin.wav" autostart="false" preload="auto" />    
         </div>
     );

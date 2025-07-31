@@ -278,7 +278,7 @@ const powerClick = () => {
 
   return (
     <div id="screen_main" className={"screen_content"} style={{ backgroundImage: backgroundImage }}>
-        <div className="oscilloscopeContainer" style={{backgroundImage: 'url('+appSettings.backgroundOscilloscope+')', width: containerWidth, height: containerHeight}}>
+        <div className="oscilloscopeContainer" style={{backgroundImage: 'url('+appSettings.backgroundDevice+')', width: containerWidth, height: containerHeight}}>
             <div style={{  display: "flex",position:'absolute',alignItems: "center",marginTop: containerMarginTop, marginLeft: containerMarginLeft}}>
                 <Dial id={"dial-frequency"} boxWidth={boxWidth} boxHeight={boxHeight} checking={processingSolution} 
                   rotationAngle={frequency} setRotationAngle={setFrequency} isReseting={isReseting}
