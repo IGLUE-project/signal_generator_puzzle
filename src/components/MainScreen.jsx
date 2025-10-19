@@ -64,34 +64,25 @@ const MainScreen = (props) => {
     let _lockWidth = Math.min(props.appHeight * aspectRatio, props.appWidth) ;
     let _lockHeight = _lockWidth / aspectRatio;
 
-    let _containerWidth = _lockWidth *0.8;
-    let _containerHeight = _lockHeight *0.8;
+    let _containerWidth = _lockWidth *0.92;
+    let _containerHeight = _lockHeight *0.92;
 
+    let _containerMarginLeft = 0.045 * _lockWidth;
+    let _containerMarginTop = 0.795 * _lockHeight;
 
-    let _containerMarginLeft=0.03 * _lockWidth;
-    let _containerMarginTop=0.68 * _lockHeight;
-
-    let _boxWidth = _lockWidth * 0.7;
-    let _boxHeight = _lockHeight * 0.7;
-
+    let _boxWidth = _lockWidth * 0.72;
+    let _boxHeight = _lockHeight * 0.72;
 
     let _lightWidth;
     let _lightHeight;
     let _lightLeft;
     let _lightTop;
 
-    switch(appSettings.skin){
-      case "RETRO":
-        break;
-      case "FUTURISTIC":
-        break;
-      default:
-        _lightWidth = _lockWidth * 0.08;
-        _lightHeight = _lockHeight * 0.08;
-        _lightLeft =  _lockWidth  * 0.61;
-        _lightTop =  _lockHeight  * 0.03
-    }
-
+    _lightWidth = _lockWidth * 0.08;
+    _lightHeight = _lockHeight * 0.08;
+    _lightLeft =  _lockWidth  * 0.71;
+    _lightTop =  _lockHeight  * 0.03;
+    
     setContainerWidth(_containerWidth);
     setContainerHeight(_containerHeight);
     setContainerMarginTop(_containerMarginTop);
@@ -115,8 +106,6 @@ const MainScreen = (props) => {
     audio.onended = null;
     audio.currentTime = 0; 
     audio.play();
-
-    
 
     setProcessingSolution(true);
     Utils.log("Check solution", [ angleToStep(frequency, frecuencyMaxSteps)+1, angleToStep(amplitude, amplitudeMaxSteps), angleToStep(phase, phaseMaxSteps)*15]);
@@ -234,7 +223,6 @@ const MainScreen = (props) => {
   };
 
 const changeWaveType = () => {
-  
   let audio = document.getElementById("audio_beep");
   audio.onended = null;
   audio.currentTime = 0; 
@@ -251,7 +239,6 @@ const powerClick = () => {
   if(processingSolution) return; 
   let audiobeep = document.getElementById("audio_beep");
   let audioTurn;
-  
   
   audiobeep.currentTime = 0; 
   audiobeep.play();
@@ -313,7 +300,7 @@ const powerClick = () => {
 
         </div>
         {light==="nok" && <div className="screenContainer" style={{backgroundImage: 'url('+appSettings.backgroundNok+')',  marginTop: boxHeight*appSettings.screenContainerMarginTop,
-            width: containerWidth*appSettings.screenContainerWidth, height: containerHeight*appSettings.screenContainerHeight, }}>
+            width: containerWidth*appSettings.screenContainerWidth, height: containerHeight*appSettings.screenContainerHeight }}>
             <svg xmlns="http://www.w3.org/2000/svg" height={appSettings.svgSize} viewBox="0 -960 960 960" width={appSettings.svgSize}
                   fill="#FFFFFF" style={{zIndex: 10, filter: "drop-shadow(0 0 0.2rem #ff2d55) drop-shadow(0 0 0.4rem #ff2d55)"}}>
                   <path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/>
@@ -332,9 +319,9 @@ const powerClick = () => {
 
        {light==="off" &&
           <div className="data-show-container" style={{visibility: powerOn ? "visible" : "hidden", opacity: powerOn ? 1 : 0, marginTop: boxHeight * appSettings.dataContainerMarginTop, marginLeft:boxWidth * appSettings.dataContainerMarginLeft, height: boxHeight*0.4, width: boxWidth, }}>
-                <p className='data-show'style={{fontSize: boxHeight * appSettings.screenTextSize+'px', transform: "rotate(11deg)", width: boxWidth*0.1, marginTop: "3.1%", position:"absolute", marginLeft:"-35%"}}>{appSettings.dialsNames[0]}:{appSettings.viewAngle==="FALSE" ? angleToStep(frequency, frecuencyMaxSteps)+1 : frequencyMapped.toFixed(3)}</p>              
-                <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize+'px', marginTop: "6.8%", width: boxWidth*0.1,  marginLeft:"3.6%", position:"absolute"}}>{appSettings.dialsNames[1]}:{appSettings.viewAngle==="FALSE" ? angleToStep(amplitude, amplitudeMaxSteps) : amplitudeMapped.toFixed(3)}</p>
-                <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize+'px' , transform: "rotate(-10deg)",  marginTop: "3.3%", width: boxWidth*0.15, position:"absolute", marginLeft:"41%"}}>{appSettings.dialsNames[2]}:{appSettings.viewAngle==="FALSE" ? angleToStep(phase, phaseMaxSteps)*15 : phaseMapped.toFixed(0)}</p>
+                <p className='data-show'style={{fontSize: boxHeight * appSettings.screenTextSize+'px', transform: "rotate(11deg)", width: boxWidth*0.1, marginTop: "6.2%", position:"absolute", marginLeft:"-37%"}}>{appSettings.dialsNames[0]}:{appSettings.viewAngle==="FALSE" ? angleToStep(frequency, frecuencyMaxSteps)+1 : frequencyMapped.toFixed(3)}</p>              
+                <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize+'px', marginTop: "9.8%", width: boxWidth*0.1,  marginLeft:"1.6%", position:"absolute"}}>{appSettings.dialsNames[1]}:{appSettings.viewAngle==="FALSE" ? angleToStep(amplitude, amplitudeMaxSteps) : amplitudeMapped.toFixed(3)}</p>
+                <p className='data-show' style={{fontSize: boxHeight * appSettings.screenTextSize+'px' , transform: "rotate(-10deg)",  marginTop: "6.2%", width: boxWidth*0.15, position:"absolute", marginLeft:"43%"}}>{appSettings.dialsNames[2]}:{appSettings.viewAngle==="FALSE" ? angleToStep(phase, phaseMaxSteps)*15 : phaseMapped.toFixed(0)}</p>
           </div>
       }
       <div className="screenContainer" style={{visibility: !powerOn ? "visible" : "hidden", opacity: !powerOn ? 1 : 0, backgroundImage: 'url('+appSettings.backgroundOff+')',  marginTop: boxHeight*appSettings.screenContainerMarginTop,

@@ -90,8 +90,8 @@ const  Dial = ( props ) => {
 
     return(
         <div className='dialContainer' style={{  
-            width: Math.min(props.boxWidth, props.boxHeight) * 0.24, 
-            height: Math.min(props.boxWidth, props.boxHeight) * 0.24,
+            width: Math.min(props.boxWidth, props.boxHeight) * 0.28, 
+            height: Math.min(props.boxWidth, props.boxHeight) * 0.28,
             left: props.xPosition,
             cursor: "pointer",
             }}

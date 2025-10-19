@@ -29,13 +29,13 @@ export const DEFAULT_APP_SETTINGS = {
   dialTextSize: "0.055", 
   screenTextSize: "0.042",
   dialTextColor: "#000000", // Color for the dial text
-  rayWidth: 0.59, 
-  rayHeight: 0.6, 
-  buttonWidth: 0.15, // Relative width of the button compared to the box width
-  buttonHeight: 0.15, // Relative height of the button compared to the box height
-  buttonMarginTop: 0.85, // Margin from the top of the box to the button in percentage of box height
-  buttonMarginLeft: 0.8, // Margin from the left of the box to the button in percentage of box width
-  dialsGap: 0.19, // Gap between dials in percentage of box width
+  rayWidth: 0.665, 
+  rayHeight: 0.675, 
+  buttonWidth: 0.19, // Relative width of the button compared to the box width
+  buttonHeight: 0.19, // Relative height of the button compared to the box height
+  buttonMarginTop: 0.98, // Margin from the top of the box to the button in percentage of box height
+  buttonMarginLeft: 0.92, // Margin from the left of the box to the button in percentage of box width
+  dialsGap: 0.22, // Gap between dials in percentage of box width
   dialsNames: ["F", "A", "Φ"], // Names for the dials
   screenTextNames: ["F", "A", "ɸ"], // Names for the screen text
 
@@ -47,14 +47,14 @@ export const DEFAULT_APP_SETTINGS = {
   svgSize: '25vmin',
   viewAngle: "FALSE", //FALSE, TRUE
   textGap: 0.085,
-  screenContainerWidth: 0.543, // Width of the screen container
-  screenContainerHeight: 0.543, // Height of the screen container
-  screenContainerMarginTop: -0.256, // Margin from the top of the box to the screen container in percentage of box height
+  screenContainerWidth: 0.550, // Width of the screen container
+  screenContainerHeight: 0.550, // Height of the screen container
+  screenContainerMarginTop: -0.282, // Margin from the top of the box to the screen container in percentage of box height
   multiButtonWidth: 0.1, // Relative width of the multi button compared to the box width
   multiButtonHeight: 0.1, // Relative height of the multi button compared to the box height
-  multiButtonMarginTop: 0.74, // Margin from the top of the box to the multi button in percentage of box height
-  powerButtonMarginLeft: 0.16, // Margin from the left of the box to the power button in percentage of box width
-  multiButtonMarginLeft: 0.14, // Margin from the left of the box to the multi button in percentage of box width
+  multiButtonMarginTop: 0.90, // Margin from the top of the box to the multi button in percentage of box height
+  multiButtonMarginLeft: 0.185, // Margin from the left of the box to the multi button in percentage of box width
+  powerButtonMarginLeft: 0.190, // Margin from the left of the box to the power button in percentage of box width
   dataContainerMarginTop: 0.235,
   dataContainerMarginLeft: -0.04, // Margin from the left of the box to the data container in percentage of box width
   multiTextColor: "rgba(161, 106, 58, 1)",
