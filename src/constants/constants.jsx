@@ -50,6 +50,7 @@ export const DEFAULT_APP_SETTINGS = {
   screenContainerWidth: 0.550, // Width of the screen container
   screenContainerHeight: 0.550, // Height of the screen container
   screenContainerMarginTop: -0.282, // Margin from the top of the box to the screen container in percentage of box height
+  dialSpeed: 40, // Speed of the dial rotation in milliseconds
   multiButtonWidth: 0.1, // Relative width of the multi button compared to the box width
   multiButtonHeight: 0.1, // Relative height of the multi button compared to the box height
   multiButtonMarginTop: 0.90, // Margin from the top of the box to the multi button in percentage of box height
