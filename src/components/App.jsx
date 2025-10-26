@@ -65,6 +65,8 @@ export default function App() {
       _appSettings.actionAfterSolve = DEFAULT_APP_SETTINGS.actionAfterSolve;
     }
 
+    _appSettings.showWaveformButton = (_appSettings.waveformButton !== "FALSE");
+
     //Init internacionalization module
     I18n.init(_appSettings);
 

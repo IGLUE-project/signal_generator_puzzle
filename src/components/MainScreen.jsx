@@ -288,7 +288,7 @@ const powerClick = () => {
               backgroundImage: 'url("' + appSettings.backgroundButton + '")',
             }}/>
 
-            {appSettings.waveformButton && <div className={"boxButton boxButton"} onClick={() => !processingSolution && changeWaveType()} 
+            {appSettings.showWaveformButton && <div className={"boxButton boxButton"} onClick={() => !processingSolution && changeWaveType()} 
               style={{ width: boxWidth * appSettings.multiButtonWidth , height: boxHeight *appSettings.multiButtonHeight, top: boxHeight * appSettings.multiButtonMarginTop, left: boxWidth * appSettings.multiButtonMarginLeft, 
               backgroundImage: 'url("' + appSettings.modeButton + '")', 
             }}><p className='multi-button' style={{ marginTop: "12vmin", textAlign: "bottom", fontSize:"1.5vmin", color:appSettings.multiTextColor}}>{I18n.getTrans("i.type")}</p></div>}

@@ -21,7 +21,7 @@ export const DEFAULT_APP_SETTINGS = {
   soundDial: "sounds/spin.wav",
   soundTurnOn: "sounds/turnon.wav", // Sound played when the power is turned on
   soundTurnOff: "sounds/turnoff.wav", // Sound played when the power is turned off
-  waveformButton: true,
+  waveformButton: "TRUE",
 
   //Developer settings
   dialWidth: 0.7, 
