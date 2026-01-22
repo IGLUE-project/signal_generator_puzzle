@@ -12,9 +12,9 @@ export let LOCALES = {
     "i.type": "TIPO"
   },
   sr:{
-    "i.continue":"Continue",
-    "i.message": "You've produced the correct wave! \n Click 'Continue' to advance to the next puzzle.",
-    "i.sound_after_solve": "sounds/after_solve_en.mp3",
-    "i.type": "TYPE"
+    "i.continue":"Nastavi",
+    "i.message": "Napravili ste ispravan talas! \n Kliknite na 'Nastavi' da biste prešli na sledeću slagalicu.",
+    "i.sound_after_solve": "sounds/after_solve_sr.mp3",
+    "i.type": "TIP"
   },
 };
