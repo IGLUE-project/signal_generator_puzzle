@@ -78,6 +78,12 @@ export default function App() {
       _appSettings.soundAfterSolve = I18n.getTrans("i.sound_after_solve");
     }
 
+    if (typeof _appSettings.background === "string" && _appSettings.background.trim() !== "" && _appSettings.background !== "NONE") {
+      _appSettings.backgroundImageProp = `url("${_appSettings.background}")`;
+      _appSettings.backgroundRepeat = "no-repeat";
+      _appSettings.backgroundSize = "100% 100%";
+    }
+
     //Change HTTP protocol to HTTPs in URLs if necessary
     _appSettings = Utils.checkUrlProtocols(_appSettings);
 
@@ -241,8 +247,20 @@ export default function App() {
     }
   ];
 
+  let globalWrapperStyle = {};
+  if(appSettings !== null && typeof appSettings.backgroundImageProp === "string"){
+    globalWrapperStyle = {
+      backgroundImage: appSettings.backgroundImageProp,
+      backgroundRepeat: appSettings.backgroundRepeat,
+      backgroundSize: appSettings.backgroundSize,
+    }
+  }
+
   return (
-    <div id="global_wrapper" className={`${(appSettings !== null && typeof appSettings.skin === "string") ? appSettings.skin.toLowerCase() : ''}`}>
+    <div id="global_wrapper" 
+      className={`${(appSettings !== null && typeof appSettings.skin === "string") ? appSettings.skin.toLowerCase() : ''}`}
+      style={globalWrapperStyle}
+    >
       {renderScreens(screens)}
     </div>
   )

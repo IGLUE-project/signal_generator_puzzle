@@ -192,12 +192,6 @@ const MainScreen = (props) => {
     update();
   };
 
-  //Pone la imagen del fondo
-  let backgroundImage = 'url("' + appSettings.background + '")';
-  if(appSettings.background && appSettings.background !== "NONE"){
-    backgroundImage += ', url("' + appSettings.background + '")';
-  }
-
   const  reset = () =>{
     setIsReseting(true);
     setAmplitude(0); 
@@ -264,7 +258,7 @@ const powerClick = () => {
 }
 
   return (
-    <div id="screen_main" className={"screen_content"} style={{ backgroundImage: backgroundImage }}>
+    <div id="screen_main" className={"screen_content"}>
         <div className="oscilloscopeContainer" style={{backgroundImage: 'url('+appSettings.backgroundDevice+')', width: containerWidth, height: containerHeight}}>
             <div style={{  display: "flex",position:'absolute',alignItems: "center",marginTop: containerMarginTop, marginLeft: containerMarginLeft}}>
                 <Dial id={"dial-frequency"} boxWidth={boxWidth} boxHeight={boxHeight} checking={processingSolution} 
